@@ -1,0 +1,108 @@
+/* all cards */
+.item {
+	background-color: #630f7611;
+	border-radius: 15px;
+	/* margin: 8px; */
+	/* width: 81.97%; */
+}
+
+.title {
+	font-size: 2.5vw;
+	/* padding-top: 15px; */
+}
+
+.item-small {
+	height: 100%;
+	width: 100%;
+	/* margin-bottom: 10px; */
+}
+
+/* ------------------upper box styling----------------------- */
+
+.top-image {
+	border-radius: 7%;
+	margin: 6%;
+	width: 95%;
+	height: 80%;
+}
+
+.top-box-grid {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-template-rows: repeat(1, 1fr);
+}
+
+.top-right {
+	grid-column: 3 / 4;
+	grid-row: 1 / 2;
+}
+.top-left .grid {
+	display: grid;
+	grid-template-columns: auto 1fr;
+}
+
+/* ---------------------------- IMAGE STYLING ------------------------------------- */
+
+.climate-image {
+	max-width: 70%;
+	max-height: 70%;
+	margin-top: 8%;
+}
+
+.mid-left .top {
+	background: rgba(107, 96, 109, 0.449);
+	/* max-height: 75%; */
+	min-height: 69.99%;
+	border-radius: 15px 15px 0px 0px;
+}
+
+/* buttons css below */
+
+a {
+	text-decoration: none;
+}
+
+/* btns */
+span {
+	cursor: pointer;
+	transition: color 0.3s;
+}
+
+.item:hover span {
+	color: #72547dbb;
+	background-color: #bc9ec1;
+	transition: all 0.3s;
+	border-radius: 20px;
+	border: none;
+	color: #fff;
+	background-color: #72547dbb;
+}
+
+.donate-btn {
+	margin-left: 5%;
+	margin-right: 5%;
+	display: flex;
+	justify-content: center;
+	/* margin-top: 10px; */
+	margin-bottom: 10px;
+	padding: 8px 16px;
+}
+
+.top-half {
+	display: center;
+	justify-content: center;
+}
+
+/* .col-lg-4 {
+	display: flex;
+	width: calc(33.33333333% - 7px) !important;
+} */
+
+.right-grid {
+	display: flex;
+
+	flex-direction: column;
+	justify-content: center;
+	padding-left: 9%;
+	padding-right: 11%;
+}

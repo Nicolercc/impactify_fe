@@ -1,0 +1,12 @@
+.thankyou-page {
+    height: 100vh;
+    background-image: url('../../src/assets/ThankYouBkgrd.jpg'); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  

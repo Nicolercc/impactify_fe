@@ -1,0 +1,8 @@
+.dc-trip-card {
+    width: 18rem;
+    margin: auto; /* Center the card */
+    margin-bottom: 20px; /* Space between cards */
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    border: 1px solid #eee; /* Light border for definition */
+  }

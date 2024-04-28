@@ -1,0 +1,26 @@
+.ts-container {
+	/* margin: 10%; */
+	/* display: flex; */
+	/* justify-content: center; */
+	background-color: rgba(151, 92, 233, 0.1);
+	/* border-radius: 20px; */
+	border: "solid black";
+	height: 45%;
+	width: 100%;
+	margin-bottom: 5%;
+}
+
+.trust-content {
+	padding: 10%;
+	padding-bottom: 50%;
+
+	/* margin: 5%; */
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.title {
+	margin-bottom: 2%;
+}

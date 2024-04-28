@@ -1,0 +1,10 @@
+
+.dropdown-item-hover {
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .dropdown-item-hover:hover {
+    background-color: #f0f0f0; /* Light grey background on hover */
+  }
+  

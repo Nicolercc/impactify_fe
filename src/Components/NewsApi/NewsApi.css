@@ -1,0 +1,32 @@
+/* NewsApi.css */
+
+/* Container for each article image */
+.article-image-container {
+	position: relative;
+	display: inline-block;
+}
+
+/* Styling for the article image */
+.article-image-container img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+/* Styling for the article title */
+.article-title {
+	position: absolute;
+	bottom: 10px; /* Adjust as needed */
+	left: 10px; /* Adjust as needed */
+	background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+	color: #ffffff; /* White text color */
+	padding: 5px 10px; /* Padding around the text */
+	font-size: 14px; /* Adjust as needed */
+	font-weight: bold; /* Bold text */
+}
+
+.css-b62m3t-container {
+	position: relative;
+	box-sizing: border-box;
+	width: 50vw;
+}

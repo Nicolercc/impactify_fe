@@ -1,0 +1,43 @@
+/* EventForm.css */
+
+.form-container {
+	background-color: #f0f2f5; /* Your chosen color for the form's background */
+	border-radius: 8px; /* Rounded corners for the form container */
+	padding: 20px; /* Spacing inside the form container */
+	margin: 20px auto; /* Center the form container with automatic margins */
+	max-width: 600px; /* Maximum width of the form container */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for depth */
+}
+
+.btn-custom {
+	background-color: #4e2855; /* Custom button background color */
+	border-color: #bc9ec1; /* Custom button border color */
+	color: black; /* Text color for the button */
+	border-radius: 20px; /* Rounded button corners */
+	padding: 10px 20px; /* Button padding */
+	font-size: 16px; /* Button text size */
+	transition:
+		background-color 0.2s,
+		border-color 0.2s; /* Smooth transition for hover effects */
+}
+
+.btn-custom:hover {
+	background-color: #bc9ec1; /* Darker shade for hover state */
+	border-color: #4e2855; /* Darker border color on hover */
+}
+
+.form-label {
+	color: #495057; /* Custom color for form labels */
+}
+
+.form-control {
+	border-radius: 15px; /* Rounded corners for form inputs */
+}
+
+/* Custom styles for react-select component if needed */
+.basic-multi-select.custom-text-dark .select__control {
+	border-radius: 15px; /* Rounded corners for select */
+	/* Additional styling can be added here */
+}
+
+/* Adjust this as needed for other specific elements */

@@ -1,0 +1,21 @@
+.outer-div {
+	border: 2px solid black;
+	height: 8%;
+	width: 90%;
+}
+
+.info-holder {
+}
+
+.categories-container {
+	/* grid goes here  */
+}
+
+.categories-container > div:hover {
+	color: #9f78a6;
+	text-decoration: underline;
+}
+
+.categories-container > div.selected {
+	color: #b79dbc;
+}

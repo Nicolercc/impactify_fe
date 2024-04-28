@@ -1,0 +1,19 @@
+.event-page-background {
+    background-color: white; /* Set the background of the whole page to white */
+    padding: 20px; /* Adds some space around the card container */
+  }
+  
+  /* Styles for the individual card container */
+  .event-card-container {
+    margin-bottom: 10px; /* Space between cards if there are multiple */
+    padding: 10px; /* Space around the card for the "smaller segment" background */
+    background-color: #f8f9fa; /* Light grey background for the smaller segment around the card */
+    border-radius: 8px; /* Optional: if you want the smaller segment to have rounded corners */
+  }
+  
+  /* Styles for the card itself */
+  .new_card {
+    border: 10px solid #4E2855; /* Medium-sized border with a color of your choosing */
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+    background-color: #fff; /* Default background color for the card */
+  }

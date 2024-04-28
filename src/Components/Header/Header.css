@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap');
+
+
+.signup-custom-color {
+    color: #D5E673;
+}
+
+/* Define the color change animation */
+@keyframes colorChange {
+
+    0%,
+    100% {
+        color: #D5E673;
+    }
+
+    /* Starting and ending with the same color for a smooth loop */
+    33% {
+        color: #BC9EC1;
+    }
+
+    /* Replace #Color2 with your second color */
+    66% {
+        color: #4E2855;
+    }
+
+    /* Replace #Color3 with your third color */
+}
+
+.custom-header {
+    animation: colorChange 10s infinite;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    font-size: 44px;
+}

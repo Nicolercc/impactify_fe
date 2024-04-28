@@ -1,0 +1,51 @@
+.donations-container {
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	/* min-height: 100vh; */
+	padding: 3rem;
+}
+
+.grey-card {
+	background-color: #ccc;
+	margin: 1rem auto 1rem;
+	border-radius: 15px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 95%;
+	max-width: 1200px;
+	padding: 2rem;
+	gap: 2rem;
+	flex-wrap: wrap;
+}
+
+.donation-info {
+	/* background-color: var(--donation-info-bg-color, #bc9ec1); */
+	/* padding: 1rem; */
+	/* padding-top: 1rem; */
+	border-radius: 10px;
+	margin: 0 auto;
+	/* margin-top: 1rem; */
+	margin-bottom: 1rem;
+	/* max-width: calc(90% - 2rem); */
+}
+
+@media (max-width: 768px) {
+	/* Adjustments for mobile view */
+	.grey-card {
+		flex-direction: column;
+		/* Stack the children on smaller screens */
+	}
+
+	.donation-info {
+		max-width: 100%;
+		/* Allow the .donation-info to take the full width on smaller screens */
+		margin-bottom: 1rem;
+		/* Add some space below the div */
+	}
+}
+
+.card {
+}

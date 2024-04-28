@@ -1,0 +1,29 @@
+.bento-box-card {
+    border-radius: 10px; /* Rounded edges for the card */
+    border: 1px solid #dee2e6; /* Border for the card */
+    max-width: 540px; /* Adjust to match the size of your hero section */
+    margin: auto; /* Centers the card if it's smaller than the container */
+  }
+  
+  .bento-box-card .img-fluid {
+    border-radius: 10px; /* Rounded edges for the images */
+    border: 1px solid #dee2e6; /* Border for the images */
+  }
+  
+  /* Additional spacing and layout adjustments as needed */
+  .bento-box-card .col-md-8,
+  .bento-box-card .col-md-4 {
+    padding: 5px; /* Spacing around images */
+  }
+  
+  /* To ensure smaller images fit neatly in a grid */
+  .bento-box-card .thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Adjust the space between the smaller images */
+  }
+  
+  .bento-box-card .thumbnail-img {
+    flex: 1 0 48%; /* Adjust this to control how many thumbnails per row, 48% will fit two images per row */
+    height: auto; /* Keep the original aspect ratio */
+  }

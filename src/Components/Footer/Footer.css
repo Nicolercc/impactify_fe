@@ -1,0 +1,13 @@
+.container {
+	gap: 2%;
+	width: auto;
+	height: 45vh;
+}
+
+a {
+	color: rgb(87, 82, 82);
+}
+/* 
+.footer {
+	height: 4;
+} */

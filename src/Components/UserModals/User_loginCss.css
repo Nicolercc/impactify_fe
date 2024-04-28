@@ -1,0 +1,30 @@
+/* background */
+.event-login-modal .modal-content {
+    background-color: #BC9EC1;
+    text-align: center;
+}
+
+/*  title */
+.event-login-modal .modal-title {
+    color: #4E2855;
+}
+
+.modal-content {
+    background-color: #f8f9fa; /* Light grey background */
+    color: #333; /* Dark grey text */
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*  buttons */
+.event-login-modal .btn-primary {
+    background-color: #4E2855; 
+    color: #BC9EC1;
+}
+
+.event-login-modal .btn-secondary {
+    background-color: #D5E675;
+    color: #4E2855; 
+    font-size: 1.1rem; 
+    padding: .75rem 1.25rem; 
+    border-radius: .5rem; 
+}

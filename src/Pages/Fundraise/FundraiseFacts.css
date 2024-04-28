@@ -1,0 +1,10 @@
+.background_only {
+    margin: 0; /* Removes the margin around the body */
+    padding: 0; /* Removes padding around the body */
+    background-image: url('../../assets/facts1.jpg'); /* Path to your image */
+    background-position: center; /* Centers the background image */
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 100vh; /* Makes sure the body covers the whole viewport height */
+    width: 100vw; /* Ensures the body covers the whole viewport width */
+  }

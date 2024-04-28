@@ -1,0 +1,233 @@
+/* Improving the overall layout and component spacing */
+.container-fluid {
+	padding: 20px;
+}
+
+/* Enhanced styling for the description area */
+.description-area {
+	background-color: rgba(
+		0,
+		0,
+		0,
+		0.7
+	); /* Darker background for better readability */
+	color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	margin-top: 20px; /* Adds some space between the image/map and the description */
+}
+
+/* Custom button styles */
+.custom-signup-btn {
+	background-color: #4e2855;
+	border-color: #bc94c1;
+	color: #d5e673;
+}
+.custom-bg {
+	background-color: #4e2855; /* Replace #skyblue with your desired color */
+}
+.adjust-right {
+	margin-left: 150px; /* Adjust this value as needed */
+}
+.custom-signup-btn:hover {
+	background-color: #d5e673;
+	border-color: #bc9ec1;
+
+	background-color: #4e2855;
+	border-color: #bc94c1;
+	color: #d5e673;
+	font-weight: bold; /* Makes the button text stand out */
+	transition:
+		background-color 0.3s ease-in-out,
+		color 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.span_color1 {
+	color: #bc94c1;
+}
+.custom-signup-btn:hover {
+	background-color: #d5e673;
+	border-color: #bc9ec1;
+	color: #4e2855; /* Changes text color on hover for contrast */
+}
+
+/* Title and text color */
+.text-custom-color {
+	color: #d5e673;
+}
+
+/* --------------------------------------------------------------------------------------------------- */
+
+/* Map container styling for responsive design */
+.map-container {
+	width: 50%;
+	height: 50vh;
+	padding-bottom: 56.25%; /*set for aspect ratio stuff */
+	position: relative;
+
+	width: 100%;
+	max-width: 1200px;
+	height: 0;
+	padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+	position: relative;
+	border: 5px solid #bc94c1; /* Adds a border to the map for consistency */
+	border-radius: 8px; /* Rounded corners */
+	/* margin: 20px auto; */
+	overflow: hidden; /* Ensures the content fits within the borders */
+}
+
+/* .map-container iframe,
+.map-container object,
+.map-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+} */
+/* --------------------------------------------------------------------------------------------------- */
+.text-center {
+	text-align: center;
+}
+
+.text-white {
+	color: #fff;
+}
+
+@media (max-width: 768px) {
+	.map-container {
+		padding-bottom: 75%;
+	}
+
+	@media (max-width: 768px) {
+		/* Improved handling for smaller screens */
+		.description-area {
+			margin-top: 15px;
+		}
+	}
+
+	/* Centered image container improvements */
+	.centered-image-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 200px;
+	}
+
+	.centered-image-container img {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 200px;
+	}
+
+	.centered-image-container img {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+	}
+
+	/* Ensuring the image has a consistent border */
+	.image-border {
+		border: 3px solid #bc94c1;
+		box-sizing: border-box;
+		border: 3px solid #bc94c1;
+		box-sizing: border-box;
+		border-radius: 8px; /* Adds rounded corners to the image */
+	}
+	.rounded-button {
+		padding: 5px 15px; /* Smaller padding */
+		border-radius: 20px; /* Fully rounded edges */
+		font-size: 0.8em; /* Smaller font size */
+		margin: 0 10px; /* Space between buttons */
+	}
+
+	/* Applying the new styles to existing buttons */
+	.map-controls button {
+		/* Add your existing button styles here */
+		background-color: #4e2855;
+		border-color: #bc94c1;
+		color: #d5e673;
+		font-weight: bold; /* Makes the button text stand out */
+		transition:
+			background-color 0.3s ease-in-out,
+			color 0.3s ease-in-out; /* Smooth transition for hover effect */
+	}
+
+	/* Making sure buttons are centered within the map controls */
+	.map-controls {
+		text-align: center; /* Center buttons horizontally */
+		margin-bottom: 10px; /* Space below the buttons */
+	}
+}
+
+/* ------------------------------------------------- */
+.image {
+	border-radius: 3%;
+}
+
+.map-row {
+	height: 30%;
+	width: 83%;
+	padding-bottom: 10%;
+}
+
+.event-details-container {
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.attend-event {
+	border-color: #bc94c17e;
+	border: solid 1px #5a565b4f;
+	border-radius: 15px;
+	width: 100%;
+	/* height: 100%; */
+}
+
+.btn-register {
+	width: 90%;
+}
+.btn-action {
+	width: 90%;
+	color: #bc94c17e;
+}
+
+.link {
+	text-decoration: underline;
+}
+
+.terms-and-privacy {
+	text-align: center;
+	margin-top: 3rem;
+}
+
+.terms,
+.privacy {
+	white-space: nowrap; /* Prevents text from wrapping */
+}
+
+.terms::after {
+	content: ", "; /* Adds a comma after "Terms of Service" */
+}
+
+.privacy::before {
+	content: " and "; /* Adds "and" before "Privacy Policy" */
+}
+
+/* Optional: Change colors */
+.terms {
+	color: blue; /* Change this to the desired color for Terms of Service */
+}
+
+.privacy {
+	color: green; /* Change this to the desired color for Privacy Policy */
+}
+
+.height-fit {
+	height: fit-content;
+}

@@ -1,0 +1,195 @@
+/*---------------------------- Entire App ----------------------------*/
+body {
+	overflow-x: hidden;
+	/* font-family: serif; */
+}
+
+/* ------------------------ Main Navigation Bar--------------------------- */
+.navbar-wrapper {
+	position: sticky;
+	inset: 0px;
+	background-size: auto;
+	background-repeat: no-repeat;
+	will-change: transform;
+	width: 100%;
+	height: unset;
+	transform: none; /* Reset the transform */
+	display: flex;
+	justify-content: center;
+}
+
+.outline-none {
+	outline: none !important;
+}
+.navbar-shadow {
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+	transition:
+		padding 0.5s,
+		border-radius 0.5s;
+}
+
+.not-scrolling {
+	margin-top: 20px;
+	padding: 5px 2 0px;
+	border-radius: 50px;
+	width: 85%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 30px 30px 10px rgba(0, 0, 0, 0.1);
+	transition:
+		padding 0.5s,
+		border-radius 0.5s;
+}
+
+.scrolling {
+	padding: 20px;
+	border-radius: 0px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pill-header {
+	transition: top 0.2s ease;
+}
+
+.sticky-navbar {
+	position: fixed;
+	top: 10px;
+	left: 0;
+	width: 100%;
+	z-index: 1000;
+}
+
+@media (max-width: 450px) {
+	.not-scrolling {
+		padding: 20px;
+		border-radius: 0px;
+		top: 0px;
+		width: 100vw;
+	}
+}
+
+/* ---------------------------- Btn ------------------------------ */
+.btn {
+	background-color: #630f76;
+	color: #ffffff;
+	border: #630f76;
+}
+
+.btn-class {
+	background-color: #630f76;
+	color: #ffffff;
+	border: #630f76;
+	position: absolute;
+	top: 50%;
+	translate: middle;
+}
+
+.btn:hover {
+	background-color: #bc9ec1;
+}
+
+/* ---------------------loading state site wide-------------------------- */
+
+/* .loader-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50vh;
+}
+
+.loader {
+	border: 8px solid rgba(0, 0, 0, 0.1);
+	border-left-color: #d5e673;
+	animation: spin 1s infinite linear;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+.loader-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 100vw;
+} */
+
+/* .loader {
+	width: 150px;
+	height: 150px;
+	background: url("/assets/Impactify_Logo.gif") center center;
+	background-size: cover;
+
+	animation: repeat 3s infinite;
+} */
+
+@keyframes repeat {
+	0% {
+		background-position: 0 0;
+	} /* Start position of the GIF */
+	100% {
+		background-position: 0 0;
+	} /* End position of the GIF */
+}
+/* @keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+} */
+
+/* -------------------- mobile view might delete -------------*/
+/* Navigation bar */
+
+.content {
+	padding-bottom: 50px;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+/*------------------- categories section ---------------- */
+/* .circle-btn {
+	background-color: #bc9ec1;
+	color: white;
+
+	transition: background-color 0.3s ease;
+}
+
+.circle-btn:hover {
+	background-color: #9973a0;
+} */
+
+/* ----------------------------------------------- Parallax Homepage------------------------------------- */
+.parallax-container {
+	position: relative;
+	overflow-x: hidden;
+	height: 100vh;
+}
+
+/* -------------------------------- categories with links all the way down--------------------------------------------- */
+.header-and-link {
+	font-size: 3.3vh;
+	text-decoration-line: underline red;
+}
+.header-and-link:hover {
+	text-decoration: underline;
+}
+
+.hover-underline:hover .header-and-link {
+	text-decoration: underline;
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+	background-color: rgba(128, 128, 128, 0.089) !important;
+	color: #630f76 !important;
+}

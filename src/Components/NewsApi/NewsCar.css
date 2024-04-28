@@ -1,0 +1,39 @@
+/* NewsApi.css */
+.slick-list {
+	margin: 0 -10px; /* Adjust the negative margin to control spacing between slides */
+}
+
+.slick-slide > div {
+	margin: 0 10px; /* Adjust margin to control spacing between slides */
+}
+
+.card {
+	transition:
+		transform 0.3s ease,
+		box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.card:hover {
+	transform: scale(1.05); /* Slightly increase size */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+	cursor: pointer;
+}
+
+/* Center the carousel on the screen */
+.carousel-container {
+	/* This class needs to be added to your carousel container */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Optional: Basic reset for Card body to enhance hover effect visibility */
+.card-body {
+	background-color: #fff; /* Default background color */
+}
+
+.slick-next,
+.slick-prev {
+	right: -25px;
+	top: 150px;
+}

@@ -1,0 +1,22 @@
+/* GoogleMap.css */
+
+/* Styling for the map container */
+.map-container {
+    width: 100%; /* Full width to ensure it's centered */
+    max-width: 1200px;
+    height: 80vh; /* Adjust height as needed */
+    margin: auto;
+    margin-top: 2rem; /* Space from the content above */
+    margin-bottom: 2rem; /* Space from the bottom of the page */
+    border: 5px solid #BC94C1; /* Consistent border styling */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Hide overflow */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .map-container {
+      height: 50vh; /* Adjust height for smaller devices */
+    }
+  }
+  
