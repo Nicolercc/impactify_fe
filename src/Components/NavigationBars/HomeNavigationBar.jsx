@@ -12,11 +12,11 @@ function MainNavigationBar({ scrolling = false }) {
 	const [getInvolvedExpanded, setGetInvolvedExpanded] = useState(false);
 	const [aboutUsExpanded, setAboutUsExpanded] = useState(false);
 
-	const handleLogout = async () => {
-		console.log("youve logged out" + token);
-		await logout(); // Call the logout function
-		// history.push('/discover/users/login')
-	};
+	// const handleLogout = async () => {
+	// 	console.log("youve logged out" + token);
+	// 	await logout();
+	// 	history.push('/discover/users/login')
+	// };
 
 	const handleGetInvolvedMouseEnter = () => {
 		setGetInvolvedExpanded(true);
@@ -97,25 +97,13 @@ function MainNavigationBar({ scrolling = false }) {
 							About us
 						</NavDropdown.Item>
 					</NavDropdown>
-					{!user ? (
-						<Nav.Link href="/discover/users/login" className="">
-							<div
-								onClick={handleLogout}
-								style={{
-									// backgroundColor: "#BC9EC1",
-									// borderColor: "#4E2855",
-									color: "#630f76",
-									borderRadius: "15px",
-								}}
-							>
-								Sign out
-							</div>
-						</Nav.Link>
-					) : (
-						<Nav.Link href="/discover/users/login" className="mx-3">
-							Sign In
-						</Nav.Link>
-					)}
+
+					<Nav.Link href="/discover/users/login" className=""></Nav.Link>
+
+					<Nav.Link href="/discover/users/login" className="mx-3">
+						Sign In
+					</Nav.Link>
+
 					<Button
 						variant=""
 						href="/discover/create-event"
@@ -130,7 +118,3 @@ function MainNavigationBar({ scrolling = false }) {
 }
 
 export default MainNavigationBar;
-
-/* <Nav.Link href="/discover/users/login" className="mx-3">
-						Sign In
-					</Nav.Link> */

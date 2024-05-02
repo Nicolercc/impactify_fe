@@ -6,7 +6,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import EventDetailsPage from "./Pages/EventDetailsPage";
 import News from "./Pages/News";
 import Events from "./Pages/Events";
-import "./App.css";
 import NewsDetailsPage from "./Pages/NewsDetailsPage";
 import CreateEventPage from "./Pages/CreateEventPage";
 import Donations from "./Pages/Donations";
@@ -30,6 +29,7 @@ import SearchPage from "./Pages/Search/SearchPage";
 import FundraiseFacts from "./Pages/Fundraise/FundraiseFacts";
 import DetailsTest from "./Pages/Test/DetailsTest";
 import VoterInfoW from "./Components/CivicApi/VoterInfoW";
+import "./App.css";
 
 function App() {
 	const backend = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
