@@ -1,20 +1,17 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { useNavigate } from "react-router";
+import { Container, Row, Col } from "react-bootstrap";
 import "./DonationsLayout.css";
-import UkraineImg from "../../assets/nowar1.jpg";
 import ClimateImg from "../../assets/vote.svg";
-import DonateCode from "../../assets/DonateEvent1.png";
 import FactsImg from "../../assets/newfacts.svg";
 import { FaArrowRight } from "react-icons/fa";
-import ProofHero from "../SocialProof/ProofHero";
 import Play from "../../assets/play.svg";
 import nowar from "../../assets/nowar.svg";
 
 function DonationsLayout({ backendEvents }) {
 	const navigate = useNavigate();
-	// console.log("donationeevents", backendEvents);
 	const ukraineEvent = backendEvents[7];
+
 	const handleDonationNavigate = () => {
 		navigate("discover/donate");
 	};
@@ -38,9 +35,6 @@ function DonationsLayout({ backendEvents }) {
 			}}
 			className=""
 		>
-			{/* <div className="fw-semibold  d-flex justify-content-center fs-2 my-2 mx-4">
-				Make a positive impact in your preferred way
-			</div> */}
 			<Row xs={1} md={12} lg={8} className="">
 				<Col style={{ paddingLeft: "0px", paddingRight: "0px" }}>
 					<div className="item ">

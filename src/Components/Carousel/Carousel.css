@@ -1,0 +1,10 @@
+.carousel-container {
+	margin: 40%;
+}
+
+.image-sizing {
+	min-height: 324px;
+	min-width: 486px;
+	max-height: 324px;
+	max-width: 486px;
+}

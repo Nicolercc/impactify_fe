@@ -1,31 +1,23 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
-import { Container, Button, Navbar } from "react-bootstrap";
-import MainContent from "../Components/MainContent";
-import TrustAndSafety from "../Components/TrustAndSafety/TrustAndSafety";
 import HeroImage from "../assets/hero2.webp";
 import MainNavigationBar from "../Components/NavigationBars/HomeNavigationBar";
 import useScrollPosition from "../Hooks/ScrollPositionProvider";
-import TrustBlock from "../Components/Midsection/TrustBlock";
 import MobileNavigation from "../Components/NavigationBars/MainNavigationBar";
-import ProofHero from "../Components/SocialProof/ProofHero";
 import DonationsLayout from "../Components/BentoBoxes/DonationsLayout";
-import CardLayout from "../Components/BentoBoxes/CardsLayout/Cards";
 import Footer from "../Components/Footer/Footer";
 import AllEventsBlock from "../Components/AllEventsBlock/AllEventsBlock";
 import InfoBlock from "../Components/InfoBlock";
-import factsImg from "../assets/facts1.jpg";
-import tag1 from "../assets/Tag1.jpg";
 import Voice from "../assets/newimg.svg";
-import Midsection from "../assets/Midsection.svg";
 import { AuthData } from "../Provider/AuthProv";
+import Carousel from "../Components/Carousel/Carousel";
 import { useAdaptiveTriggers } from "../Hooks/AdaptiveConfig";
-import "./Homepage.css";
+import CarouselComponent from "../Components/Carousel/Carousel";
+// import "./Homepage.css";
 
 function Homepage({ backendEvents }) {
-	const { user } = useContext(AuthData);
-	console.log("Homepage events:", backendEvents);
 	const [isResponsive, setIsResponsive] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
 
 	const adaptiveWidth = useAdaptiveTriggers({
 		onSmallEnter: () =>
@@ -45,10 +37,10 @@ function Homepage({ backendEvents }) {
 	useEffect(() => {
 		const handleResize = () => {
 			setIsResponsive(window.innerWidth <= 991);
+			setIsMobile(window.innerWidth <= 780);
 		};
 		handleResize();
 		window.addEventListener("resize", handleResize);
-
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
@@ -85,9 +77,7 @@ function Homepage({ backendEvents }) {
 							transform: "translate(-50%, -50%)",
 							// zIndex: 10,
 						}}
-					>
-						{/* Start Event */}
-					</div>
+					></div>
 				</div>
 
 				{/* navigation */}
@@ -117,7 +107,11 @@ function Homepage({ backendEvents }) {
 					}}
 					className=" d-flex justify-content-center "
 				>
-					<AllEventsBlock backendEvents={backendEvents} />
+					{isMobile ? (
+						<CarouselComponent backendEvents={backendEvents} />
+					) : (
+						<AllEventsBlock backendEvents={backendEvents} />
+					)}
 				</ParallaxLayer>
 				{/* page 2 */}
 				<ParallaxLayer
@@ -162,20 +156,6 @@ function Homepage({ backendEvents }) {
 					<Footer />
 				</ParallaxLayer>
 			</Parallax>
-			{/* {isResponsive && (
-				<div className="sticky-footer">
-					<Button
-						className="btn"
-						variant=""
-						style={{
-							color: "#ffffff",
-							cursor: "pointer",
-						}}
-					>
-						Start Event
-					</Button>
-				</div>
-			)} */}
 		</div>
 	);
 }

@@ -16,14 +16,13 @@ import Logo from "../Logo";
 import { useAuthDataProvider } from "../../Provider/AuthProv";
 
 function MainNavigationBar() {
-	const { user, logout } = useAuthDataProvider();
+	// const { user, logout } = useAuthDataProvider();
 	const [isResponsive, setIsResponsive] = useState(false);
 
-	const handleLogout = async () => {
-		console.log("youve logged out" + token);
-		await logout();
-	};
-
+	// const handleLogout = async () => {
+	// 	console.log("youve logged out" + token);
+	// 	await logout();
+	// };
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -84,23 +83,11 @@ function MainNavigationBar() {
 							About us
 						</NavDropdown.Item>
 					</NavDropdown>
-					{user ? (
-						<Nav.Link href="/discover/users/login" className="">
-							<div
-								onClick={() => handleLogout()}
-								style={{
-									color: "#630f76",
-									borderRadius: "15px",
-								}}
-							>
-								Sign out
-							</div>
-						</Nav.Link>
-					) : (
-						<Nav.Link href="/discover/users/login" className="mx-3">
-							Sign In
-						</Nav.Link>
-					)}
+
+					<Nav.Link href="/discover/users/login" className="mx-3">
+						Sign In
+					</Nav.Link>
+
 					<Link to="/discover/create-event">
 						<Button
 							variant=""
