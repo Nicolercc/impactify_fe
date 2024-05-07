@@ -14,13 +14,22 @@ function CarouselComponent({ backendEvents }) {
 			<div className="fw-bold fs-4 my-3 d-flex justify-content-center">
 				Most popular events
 			</div>
-			<div style={{ padding: "10px" }}>
-				<Carousel activeIndex={index} onSelect={handleSelect} indicators={true}>
+			<div
+				style={{ padding: "10px" }}
+				className="d-flex justify-content-center"
+			>
+				<Carousel
+					activeIndex={index}
+					onSelect={handleSelect}
+					interval={null}
+					indicators={true}
+					className="custom-carousel"
+				>
 					{backendEvents.map((event, index) => (
 						<Carousel.Item key={index}>
 							<img
-								className="d-block w-100 image-sizing"
-								style={{ borderRadius: "20px" }}
+								className="d-block  image-sizing"
+								style={{ width: "100%", height: "100%" }}
 								src={event.event_photo}
 								alt={event.event_title}
 							/>
@@ -32,7 +41,6 @@ function CarouselComponent({ backendEvents }) {
 									width: "100%",
 									height: "100%",
 									backgroundColor: "rgba(0, 0, 0, 0.5)",
-									borderRadius: "20px",
 								}}
 							></div>
 							<Carousel.Caption>

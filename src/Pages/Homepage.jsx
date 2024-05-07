@@ -10,9 +10,9 @@ import AllEventsBlock from "../Components/AllEventsBlock/AllEventsBlock";
 import InfoBlock from "../Components/InfoBlock";
 import Voice from "../assets/newimg.svg";
 import { AuthData } from "../Provider/AuthProv";
-import Carousel from "../Components/Carousel/Carousel";
 import { useAdaptiveTriggers } from "../Hooks/AdaptiveConfig";
 import CarouselComponent from "../Components/Carousel/Carousel";
+import MobileImg from "../assets/Mobile.png";
 // import "./Homepage.css";
 
 function Homepage({ backendEvents }) {
@@ -75,7 +75,6 @@ function Homepage({ backendEvents }) {
 							top: "12%",
 							left: "50%",
 							transform: "translate(-50%, -50%)",
-							// zIndex: 10,
 						}}
 					></div>
 				</div>
@@ -107,11 +106,14 @@ function Homepage({ backendEvents }) {
 					}}
 					className=" d-flex justify-content-center "
 				>
-					{isMobile ? (
-						<CarouselComponent backendEvents={backendEvents} />
-					) : (
-						<AllEventsBlock backendEvents={backendEvents} />
-					)}
+					{/* {isMobile ? (
+						<div>
+							<CarouselComponent backendEvents={backendEvents} />
+							Jessica
+						</div>
+					) : ( */}
+					<AllEventsBlock backendEvents={backendEvents} />
+					{/* )} */}
 				</ParallaxLayer>
 				{/* page 2 */}
 				<ParallaxLayer
@@ -127,7 +129,7 @@ function Homepage({ backendEvents }) {
 							width: "100%",
 							backgroundRepeat: "no-repeat",
 							backgroundSize: "100%",
-							backgroundImage: `url(${Voice})`,
+							backgroundImage: `url(${isMobile ? MobileImg : Voice})`,
 						}}
 					></div>
 				</ParallaxLayer>
