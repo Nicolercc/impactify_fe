@@ -30,7 +30,12 @@ function CategoriesSection({ onSelectCategory }) {
 					Explore what's popular
 				</div>
 
-				<Col sm={10} xs={12} className="text-center">
+				<Col
+					sm={10}
+					xs={12}
+					className="text-center"
+					style={{ paddingleft: "20%", paddingRight: "20px" }}
+				>
 					<div className="categories-container categories-container-scroll d-flex justify-content-center">
 						<Row>
 							<div

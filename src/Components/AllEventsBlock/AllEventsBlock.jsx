@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import MainContent from "../MainContent";
-import Categories from "../CategoriesSection/CategoriesSection-copy";
+import Categories from "../CategoriesSection/CategoriesSection";
 import MobileMainContent from "../MainContent/MobileMainContent";
 import CarouselComponent from "../Carousel/Carousel";
 
 function AllEventsBlock({ backendEvents }) {
-	// console.log("these are all events block", backendEvents)
 	const [isMobile, setIsMobile] = useState(false);
 	useEffect(() => {
 		const handleResize = () => {
