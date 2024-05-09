@@ -1,14 +1,7 @@
 .outer-div {
 	border: 2px solid black;
-	height: 8%;
+	/* height: 8%; */
 	width: 90%;
-}
-
-.info-holder {
-}
-
-.categories-container {
-	/* grid goes here  */
 }
 
 .categories-container > div:hover {
@@ -18,4 +11,21 @@
 
 .categories-container > div.selected {
 	color: #b79dbc;
+}
+
+.carousel-control-next {
+	margin-right: 10%;
+}
+
+.categories-container-scroll {
+	overflow-x: auto;
+}
+
+.categories-container {
+	display: flex;
+}
+
+.row-edit {
+	padding-right: 0 !important;
+	padding-left: 0 !important;
 }

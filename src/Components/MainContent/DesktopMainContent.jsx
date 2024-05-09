@@ -64,6 +64,7 @@ function MainContent({ backendEvents }) {
 									key={eventObj.event_id + "main"}
 									xs={12}
 									sm={6}
+									// md={4}
 									lg={3}
 									className=""
 								>

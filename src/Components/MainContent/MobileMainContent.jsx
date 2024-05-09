@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import Card from "./Card/Card";
+import Card from "../Card/Card";
 import { Col, Row, Button } from "react-bootstrap";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import CategoriesSection from "./CategoriesSection/CategoriesSection";
+import CategoriesSection from "../CategoriesSection/CategoriesSection";
 import { useNavigate } from "react-router";
 
 function MainContent({ backendEvents }) {
 	const navigate = useNavigate();
 	const [selectedEvent, setSelectedEvent] = useState({});
 	const [startIndex, setStartIndex] = useState(0);
-	const eventsPerPage = 4;
+	const eventsPerPage = 1;
 
 	const handleNext = () => {
 		setStartIndex((prevIndex) => prevIndex + eventsPerPage);
@@ -32,7 +32,7 @@ function MainContent({ backendEvents }) {
 
 	return (
 		<div className="mt-5" style={{ width: "100vw" }}>
-			<div className="m-4">
+			<div className="">
 				<div className="position-relative d-block">
 					<div className="d-flex justify-content-between align-items-center m-3">
 						<div className="fw-bold fs-4">Most popular events</div>
@@ -64,6 +64,7 @@ function MainContent({ backendEvents }) {
 									key={eventObj.event_id + "main"}
 									xs={12}
 									sm={6}
+									// md={4}
 									lg={3}
 									className=""
 								>

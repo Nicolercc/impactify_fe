@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useNavigate, Link } from "react-router-dom";
 
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { GiWorld } from "react-icons/gi";
 import { BiDonateHeart } from "react-icons/bi";
 import { MdOutlinePolicy, MdAllInbox } from "react-icons/md";
@@ -14,39 +14,14 @@ function CategoriesSection({ onSelectCategory }) {
 	const navigate = useNavigate();
 	const [selectedCategory, setSelectedCategory] = useState(null);
 
-	// const navigateCategories = (category) => {
-	//     console.log('Category pressed:', category);
-	//     switch (category) {
-	//         case 'Local':
-	// 			console.log("you clicked me")
-	//             return navigate('/discover/events');
-	//         case 'Coming Up':
-	//             return navigate('/');
-	//         case 'Global Issues':
-	//             return navigate('/discover/news');
-	//         case 'Politics':
-	//             return navigate('/');
-	//         case 'Community':
-	//             return navigate('/discover/events');
-	//         case 'Donation':
-	//             return navigate('/discover/donations');
-	//         case 'All':
-	//             return navigate('/');
-	//         default:
-	//             console.log('Unknown category:', category);
-
-	//     }
+	// const handleClick = (category) => {
+	// 	onSelectCategory(category);
+	// 	navigateCategories(category);
 	// };
 
-	const handleClick = (category) => {
-		console.log("HERE I AM");
-		onSelectCategory(category);
-		navigateCategories(category);
-	};
-
-	const testClick = (category) => {
-		console.log("ME" + category);
-	};
+	// const testClick = (category) => {
+	// 	console.log("ME" + category);
+	// };
 
 	return (
 		<div className="">
@@ -55,22 +30,24 @@ function CategoriesSection({ onSelectCategory }) {
 					Explore what's popular
 				</div>
 
-				<Col sm={10} xs={7} className="text-center">
-					<div className="categories-container d-flex justify-content-center">
+				<Col
+					sm={10}
+					xs={12}
+					className="text-center"
+					style={{ paddingleft: "20%", paddingRight: "20px" }}
+				>
+					<div className="categories-container categories-container-scroll d-flex justify-content-center">
 						<Row>
-							<Link
+							<div
 								to={"discover/events"}
 								key={"Popular-1"}
-								className={`mx-3 categories-container ${
-									selectedCategory === "Local" ? "selected" : ""
-								}`}
-								// onClick={() =>testClick("This")}
+								className={`mx-3 categories-container `}
 							>
 								<IoLocationOutline
 									style={{ fontSize: "44px", color: "#630f76" }}
 								/>
 								<div className="fs-6 fw-semibold">Local</div>
-							</Link>
+							</div>
 						</Row>
 						<Row>
 							<div
@@ -78,7 +55,6 @@ function CategoriesSection({ onSelectCategory }) {
 								className={`mx-3 ${
 									selectedCategory === "Coming Up" ? "selected" : ""
 								}`}
-								// onClick={() => handleClick("Coming Up")}
 							>
 								<IoCalendarOutline
 									style={{ fontSize: "44px", color: "#630f76" }}
@@ -87,17 +63,16 @@ function CategoriesSection({ onSelectCategory }) {
 							</div>
 						</Row>
 						<Row>
-							<Link
+							<div
 								to={"discover/news"}
 								key={"Popular-3"}
 								className={`mx-3 ${
 									selectedCategory === "Global Issues" ? "selected" : ""
 								}`}
-								// onClick={() => handleClick("Global Issues")}
 							>
 								<GiWorld style={{ fontSize: "44px", color: "#630f76" }} />
 								<div className="fs-6 fw-semibold">Global</div>
-							</Link>
+							</div>
 						</Row>
 						<Row>
 							<div
@@ -105,7 +80,6 @@ function CategoriesSection({ onSelectCategory }) {
 								className={`mx-3 ${
 									selectedCategory === "Politics" ? "selected" : ""
 								}`}
-								// onClick={() => handleClick("Politics")}
 							>
 								<MdOutlinePolicy
 									style={{ fontSize: "44px", color: "#630f76" }}
@@ -119,7 +93,6 @@ function CategoriesSection({ onSelectCategory }) {
 								className={`mx-3 ${
 									selectedCategory === "Community" ? "selected" : ""
 								}`}
-								// onClick={() => handleClick("Community")}
 							>
 								<FaPeopleGroup style={{ fontSize: "44px", color: "#630f76" }} />
 								<div className="fs-6 fw-semibold">Community</div>
@@ -132,7 +105,6 @@ function CategoriesSection({ onSelectCategory }) {
 								className={`mx-3 ${
 									selectedCategory === "Donation" ? "selected" : ""
 								}`}
-								// onClick={() => handleClick("Donation")}
 							>
 								<BiDonateHeart style={{ fontSize: "44px", color: "#630f76" }} />
 								<div className="fs-6 fw-semibold">Donation</div>
@@ -144,7 +116,6 @@ function CategoriesSection({ onSelectCategory }) {
 								className={`mx-3 ${
 									selectedCategory === "All" ? "selected" : ""
 								}`}
-								// onClick={() => handleClick("All")}
 							>
 								<MdAllInbox style={{ fontSize: "44px", color: "#630f76" }} />
 								<div className="fs-6 fw-semibold">All</div>

@@ -8,3 +8,23 @@
 	max-height: 324px;
 	max-width: 486px;
 }
+
+.carousel {
+	width: 70%;
+	max-width: 100%;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.carousel-item img {
+	max-width: 100%;
+	height: auto;
+}
+
+.custom-carousel .carousel-indicators .active {
+	background-color: rgb(233, 180, 242);
+}
+
+.carousel-control-prev {
+	margin-left: 10%;
+}
