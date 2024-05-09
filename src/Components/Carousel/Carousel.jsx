@@ -1,12 +1,25 @@
 import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
+import { useNavigate } from "react-router-dom";
+import Card from "../Card/Card";
 import "./Carousel.css";
 
 function CarouselComponent({ backendEvents }) {
+	const navigate = useNavigate();
 	const [index, setIndex] = useState(0);
-	console.log(backendEvents);
+
 	const handleSelect = (selectedIndex, e) => {
 		setIndex(selectedIndex);
+	};
+
+	const handleContentClick = (eventObj) => {
+		console.log("you clicked me", eventObj);
+		let selected = backendEvents.find(
+			(bkdEnvts) => bkdEnvts.event_id === eventObj.event_id
+		);
+		navigate(`/discover/eventdetails/${eventObj.event_id}`, {
+			state: { event: selected },
+		});
 	};
 
 	return (
@@ -26,7 +39,10 @@ function CarouselComponent({ backendEvents }) {
 					className="custom-carousel"
 				>
 					{backendEvents.map((event, index) => (
-						<Carousel.Item key={index}>
+						<Carousel.Item
+							key={index}
+							onClick={() => handleContentClick(event)}
+						>
 							<img
 								className="d-block  image-sizing"
 								style={{ width: "100%", height: "100%" }}
