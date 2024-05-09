@@ -31,12 +31,12 @@ function CategoriesSection({ onSelectCategory }) {
 				</div>
 
 				<Col sm={10} xs={12} className="text-center">
-					<div className="categories-container d-flex justify-content-center">
-						<Row>
+					<div className="categories-container d-flex justify-content-center ">
+						<Row className="category-item">
 							<div
-								to={"discover/events"}
-								key={"Popular-1"}
-								className={`mx-3 categories-container `}
+								className={`category-icon-text-container ${
+									selectedCategory === "Local" ? "selected" : ""
+								}`}
 							>
 								<IoLocationOutline
 									style={{ fontSize: "44px", color: "#630f76" }}
@@ -44,6 +44,7 @@ function CategoriesSection({ onSelectCategory }) {
 								<div className="fs-6 fw-semibold">Local</div>
 							</div>
 						</Row>
+
 						<Row>
 							<div
 								key={"Popular-2"}
@@ -94,8 +95,7 @@ function CategoriesSection({ onSelectCategory }) {
 							</div>
 						</Row>
 						<Row>
-							<Link
-								to={"discover/donations"}
+							<div
 								key={"Popular-6"}
 								className={`mx-3 ${
 									selectedCategory === "Donation" ? "selected" : ""
@@ -103,7 +103,7 @@ function CategoriesSection({ onSelectCategory }) {
 							>
 								<BiDonateHeart style={{ fontSize: "44px", color: "#630f76" }} />
 								<div className="fs-6 fw-semibold">Donation</div>
-							</Link>
+							</div>
 						</Row>
 						<Row>
 							<div
