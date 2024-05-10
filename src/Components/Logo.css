@@ -20,12 +20,12 @@
 	object-fit: contain;
 }
 .impactify-parent {
-	padding-left: 5%;
-	padding-right: 10%;
+	/* padding-left: 5%; */
+	/* padding-right: 5%; */
 	/* box-sizing: border-box; */
 	position: relative;
 	letter-spacing: normal;
 	text-align: left;
-	font-size: 34px;
+	font-size: 30px;
 	font-family: serif;
 }

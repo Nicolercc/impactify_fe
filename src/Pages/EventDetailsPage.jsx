@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-// import {
-// 	FacebookShareButton,
-// 	EmailShareButton,
-// 	TwitterShareButton,
-// } from "react-share";
 import axios from "axios";
 import "./EventDetailsPage.css";
-
-import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
+import { Row, Col, Button, Form, Modal } from "react-bootstrap";
 import StripeBuy from "../Components/Stripe/StripeBuy";
 import GoogleMap from "../Components/Maps/GoogleMap";
 import defaultImage from "../assets/NoImage.jpg";
@@ -23,20 +17,14 @@ import {
 } from "react-icons/ci";
 import { IoMegaphoneSharp } from "react-icons/io5";
 import { useAuthDataProvider } from "../Provider/AuthProv";
-import loader from "../Components/LoadingState/LoadingState";
 
 function EventDetailsPage() {
 	let location = useLocation();
 	const navigate = useNavigate();
 	const { event } = location.state || { event: {} };
-	const eventUserId = event?.user_id;
-
-	const { user } = useAuthDataProvider();
 	const backend = import.meta.env.VITE_BACKEND_URL;
-	// const [featuredEvent, setFeatureEvent] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [travelMode, setTravelMode] = useState("DRIVING");
-	// const [showDonationButton, setShowDonationButton] = useState(false);
 	const [showThankYouModal, setShowThankYouModal] = useState(false);
 	const [fetchedUser, setFetchedUser] = useState(null);
 	const [checked, setChecked] = useState(false);
@@ -47,27 +35,6 @@ function EventDetailsPage() {
 		email: "",
 		mobile: "",
 	});
-
-	// const handleTextChange = (event) => {
-	// 	const { name, value } = event.target;
-	// 	setRegisteredGuest({ ...registeredGuest, [name]: value });
-	// };
-
-	// const handleTextChange = (event) => {
-	// 	const { name, value } = event.target;
-	// 	setRegisteredGuest({ ...registeredGuest, [name]: value });
-	// }
-
-	// const handleCloseOut = () => {
-	// 	setTimeout(() => {
-	// 		setShowThankYouModal(false); // Close the modal
-	// 		navigate("/"); // Redirect to another page
-	// 	}, 1000);
-	// };
-
-	// const handleCheckboxChange = () => {
-	// 	setChecked(!checked);
-	// };
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -80,8 +47,6 @@ function EventDetailsPage() {
 			} catch (error) {
 				console.error("Error Fetching Backend Events:", error);
 			} finally {
-				// Step 2: Delay transition to false for loading state
-
 				setLoading(false);
 			}
 		};
@@ -175,32 +140,26 @@ function EventDetailsPage() {
 								</Row>
 								<Row style={{ height: "12vh" }} className="">
 									<Col sm={6} md={6} className="">
-										<div className="mx-2 my-2">
+										<div className="mx-2 -2">
 											<CiLocationOn className=" " />
 											<span className="fw-bold fs-5 mx-2">Location</span>
-											<span className="fw-bold fs-6 d-block p-2">
-												{/* {locationName || 'unavilable' } */}
-											</span>
 										</div>
 									</Col>
 									<Col sm={6} md={6}>
-										<div className="mx-2 my-2">
-											<div className="m-2">
+										<div className="mx-2 -2">
+											<div className="mx-2">
 												<CiCalendar className="" />
 												<span className="fw-bold fs-5 mx-2">Time</span>
 												<span className="fw-bold fs-6 d-block my-2">
 													{eventDate || "unavilable"}
 												</span>
-												<span className="fw-bold fs-6 d-block">
-													{/* {formatTime(time) || event.event_time} */}
-												</span>
+												<span className="fw-bold fs-6 d-block"></span>
 											</div>
 										</div>
 									</Col>
 								</Row>
 								<Row className="my-2 ">
 									<div className="fs-4 fw-bold mt-4">About this event</div>
-									{/* <div className=" my-2">{event_details}</div> */}
 								</Row>
 								<hr className="my-4" />
 								<Row>
@@ -277,7 +236,6 @@ function EventDetailsPage() {
 											</div>
 
 											<Form.Group controlId="email">
-												<Form.Label></Form.Label>
 												<Form.Control
 													type="email"
 													placeholder="email"
