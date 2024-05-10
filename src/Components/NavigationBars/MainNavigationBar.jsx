@@ -13,7 +13,9 @@ import {
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Logo from "../Logo";
+import hand from "../../assets/hand.png";
 import { useAuthDataProvider } from "../../Provider/AuthProv";
+// import newsApi from "../NewsApi";
 
 function MainNavigationBar() {
 	// const { user, logout } = useAuthDataProvider();
