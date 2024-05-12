@@ -126,10 +126,10 @@ function MainNavigationBar() {
 				<Row className="w-100">
 					<Col md={6}>
 						<Nav className="ml-auto">
-							<Nav.Link href="/howitworks" className="mx-3 mt-3">
+							<Nav.Link href="/howitworks" className=" mt-3">
 								How It Works
 							</Nav.Link>
-							<Nav.Link href="/discover/users/login" className="mx-3">
+							<Nav.Link href="/discover/users/login" className="">
 								Sign In
 							</Nav.Link>
 						</Nav>

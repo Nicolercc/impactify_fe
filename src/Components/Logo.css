@@ -12,15 +12,13 @@
 }
 .hand-icon {
 	width: auto;
-
 	margin: 0 !important;
-
 	left: 10;
 	max-height: 100%;
 	object-fit: contain;
 }
 .impactify-parent {
-	padding-left: 10px;
+	padding-left: 13px;
 	position: relative;
 	letter-spacing: normal;
 	text-align: left;
