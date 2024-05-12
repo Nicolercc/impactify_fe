@@ -9,30 +9,32 @@ import Footer from "../Components/Footer/Footer";
 import AllEventsBlock from "../Components/AllEventsBlock/AllEventsBlock";
 import InfoBlock from "../Components/InfoBlock";
 import Voice from "../assets/newimg.svg";
-import { AuthData } from "../Provider/AuthProv";
 import { useAdaptiveTriggers } from "../Hooks/AdaptiveConfig";
 import CarouselComponent from "../Components/Carousel/Carousel";
 import MobileImg from "../assets/Mobile.png";
-// import "./Homepage.css";
 
 function Homepage({ backendEvents }) {
 	const [isResponsive, setIsResponsive] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);
 
-	const adaptiveWidth = useAdaptiveTriggers({
-		onSmallEnter: () =>
-			console.log("its small, apply small parallax props now"),
-		onExtraSmallEnter: () =>
-			console.log("its extra small, apply extra small parallax props now"),
-		onMediumEnter: () =>
-			console.log("its medium, apply medium parallax props now"),
-		onLargeEnter: () =>
-			console.log("its large, apply large parallax props now"),
-		onExtraLargeEnter: () =>
-			console.log("its extra large, apply extra large parallax props now"),
-	});
+	// const adaptiveWidth = useAdaptiveTriggers({
+	// 	onExtraSmallEnter: () => {},
+	// 	onSmallEnter: () => {},
+	// 	onMediumEnter: () => {},
+	// 	onLargeEnter: () => {},
+	// 	onExtraLargeEnter: () => {},
+	// });
 
-	//console.log(adaptiveWidth);
+	const {
+		parallaxConfig: {
+			parallax,
+			firstPage,
+			secondPage,
+			thirdPage,
+			fourthPage,
+			footer,
+		},
+	} = useAdaptiveTriggers() || {};
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -53,7 +55,7 @@ function Homepage({ backendEvents }) {
 	return (
 		<div className="d-flex justify-content-center align-items-center parallax-container">
 			<Parallax
-				pages={4.4}
+				pages={parallax.pages}
 				ref={parallaxRef}
 				className="parallax-container"
 				style={{
@@ -97,9 +99,9 @@ function Homepage({ backendEvents }) {
 				</ParallaxLayer>
 				{/* page 1 */}
 				<ParallaxLayer
-					offset={0.7}
-					speed={0}
-					factor={1.1}
+					offset={firstPage.offset}
+					speed={firstPage.speed}
+					factor={firstPage.factor}
 					style={{
 						backgroundColor: "white",
 						borderRadius: "30px",
@@ -117,9 +119,9 @@ function Homepage({ backendEvents }) {
 				</ParallaxLayer>
 				{/* page 2 */}
 				<ParallaxLayer
-					offset={1.64}
-					speed={0}
-					factor={1}
+					offset={secondPage.offset}
+					speed={secondPage.speed}
+					factor={secondPage.factor}
 					className=" d-flex justify-content-center"
 					style={{ background: `white` }}
 				>
@@ -135,9 +137,9 @@ function Homepage({ backendEvents }) {
 				</ParallaxLayer>
 				{/* page 3 */}
 				<ParallaxLayer
-					offset={2.47}
-					speed={0}
-					factor={0.5}
+					offset={thirdPage.offset}
+					speed={thirdPage.speed}
+					factor={thirdPage.factor}
 					className=" d-flex justify-content-center"
 					style={{ backgroundColor: "white" }}
 				>
@@ -145,16 +147,16 @@ function Homepage({ backendEvents }) {
 				</ParallaxLayer>
 				{/* page 4 */}
 				<ParallaxLayer
-					offset={2.9}
-					speed={0}
-					factor={1.2}
+					offset={fourthPage.offset}
+					speed={fourthPage.speed}
+					factor={fourthPage.factor}
 					className=" d-flex justify-content-center"
 					style={{ backgroundColor: "white" }}
 				>
 					<DonationsLayout backendEvents={backendEvents} />
 				</ParallaxLayer>
 
-				<ParallaxLayer offset={4.01} factor={1.1}>
+				<ParallaxLayer offset={footer.offset} factor={footer.factor}>
 					<Footer />
 				</ParallaxLayer>
 			</Parallax>
