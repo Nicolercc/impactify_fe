@@ -50,11 +50,54 @@ function Homepage({ backendEvents }) {
 		element: parallaxRef,
 	});
 
+	const innerStyles = {
+		//xs and xl are the only ones  that work
+		xs: {
+			padding: "10px",
+			fontSize: "14px",
+		},
+		sm: {
+			padding: "20px",
+			fontSize: "16px",
+		},
+		md: {
+			padding: "30px",
+			fontSize: "18px",
+		},
+		lg: {
+			padding: "40px",
+			fontSize: "50px",
+		},
+		xl: {
+			padding: "50px",
+
+			// fontSize: "22px",
+		},
+	};
+
+	const getCurrentInnerStyle = () => {
+		switch (adaptiveWidth) {
+			case "xs":
+				return innerStyles.xs;
+			case "sm":
+				return innerStyles.sm;
+			case "md":
+				return innerStyles.md;
+			case "lg":
+				return innerStyles.lg;
+			case "xl":
+				return innerStyles.xl;
+			default:
+				return {};
+		}
+	};
+
 	return (
 		<div className="d-flex justify-content-center align-items-center parallax-container">
 			<Parallax
 				pages={4.4}
 				ref={parallaxRef}
+				innerStyle={getCurrentInnerStyle()}
 				className="parallax-container"
 				style={{
 					display: "flex",

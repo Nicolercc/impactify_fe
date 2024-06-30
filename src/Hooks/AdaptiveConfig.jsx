@@ -1,5 +1,10 @@
 import { useLayoutEffect, useState } from "react";
 
+/**
+ * this hook sets up event listeners for window resizing and triggers
+ * specified callback functions when the window width crosses predefined breakpoints
+ */
+
 export const Adaptive = Object.freeze({
 	xs: "xs",
 	s: "s",
@@ -18,6 +23,7 @@ export function useAdaptiveTriggers({
 	const [width, setWidth] = useState(Adaptive.xl);
 
 	useLayoutEffect(() => {
+		//handle window resizing by triggering fucntions based on the window size
 		const handleResize = () => {
 			if (window?.innerWidth < 768) {
 				onExtraSmallEnter?.();

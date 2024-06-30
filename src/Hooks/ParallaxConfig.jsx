@@ -1,3 +1,5 @@
+//Configuration for the parallax effect, detailing settings screen sizes to achieve desired effect.
+
 const ParallaxConfig = {
 	// xs not done
 	xs: {

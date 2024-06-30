@@ -1,27 +1,31 @@
 import { useState, useEffect } from "react";
 
+//this hook is meant to track the scroll position of a given element
+
 function useScrollPosition({ element }) {
-  const [scrolling, setScrolling] = useState(false);
+	//element reference returns a boolean indicating if the el has been scrolled
 
-  useEffect(() => {
-    const container = element.current.container.current;
+	const [scrolling, setScrolling] = useState(false);
 
-    const handleOnScroll = () => {
-      setScrolling(container.scrollTop > 0);
-    };
+	useEffect(() => {
+		const container = element.current.container.current;
 
-    if (container) {
-      container.addEventListener('scroll', handleOnScroll);
-    }
+		const handleOnScroll = () => {
+			setScrolling(container.scrollTop > 0);
+		};
 
-    return () => {
-      if (container) {
-        container.removeEventListener("scroll", handleOnScroll);
-      }
-    };
-  }, [element]);
+		if (container) {
+			container.addEventListener("scroll", handleOnScroll);
+		}
 
-  return scrolling;
+		return () => {
+			if (container) {
+				container.removeEventListener("scroll", handleOnScroll);
+			}
+		};
+	}, [element]);
+
+	return scrolling;
 }
 
 export default useScrollPosition;
