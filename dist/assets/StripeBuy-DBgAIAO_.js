@@ -1,0 +1,1 @@
+import{j as t}from"./index-CQP5voPE.js";const l=({buyButtonId:e})=>t.jsx("div",{style:{display:"flex",justifyContent:"center"},children:t.jsx("stripe-buy-button",{"buy-button-id":e,"publishable-key":"pk_test_51OuGNIEGEz5QEv9zbSNz4lKjW6hdOTDl693x9wJ9qGs7vLWpdttThgbzyTPtJOazczA3NRSttAZOLcJiBp6lalI300YCmRbi5D"})});export{l as default};
