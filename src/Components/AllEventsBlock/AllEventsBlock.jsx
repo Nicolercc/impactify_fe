@@ -9,7 +9,7 @@ function AllEventsBlock({ backendEvents }) {
 	const [isMobile, setIsMobile] = useState(false);
 	const [loading, setLoading] = useState(false);
 
-	useEffect(() => {
+	useEffect(() => {git
 		const handleResize = () => {
 			setIsMobile(window.innerWidth <= 780);
 		};
