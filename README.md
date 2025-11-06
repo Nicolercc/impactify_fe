@@ -1,43 +1,80 @@
-# Frontend for Impactify 🎨
+# 🌍 Impactify — Frontend
 
-Welcome to the frontend repository of the Civic Engagement App! This frontend is built using React to provide an intuitive user interface for interacting with events and donations.
+Welcome to the **Impactify Frontend**, the user-facing side of my **Civic Engagement App** designed to make activism easier, more accessible, and more impactful.
 
-## Features ✨
+This React-based application allows users to **discover, attend, and create community events**, **start their own causes to receive donations**, and **support others through Stripe-powered contributions** — all while visualizing events on **Google Maps** for an engaging experience.
 
-- **Event Display:** Users can view events happening in their area.
-- **Event Creation:** Create new events to engage the community.
-- **Event Deletion:** Delete events if needed.
-- **Donation Interface:** Support local causes by making donations.
+---
 
-## Technologies Used 💻
+## ✨ Features
 
-- **React:** A JavaScript library for building user interfaces.
-- **Axios:** Promise-based HTTP client for making API requests.
-- **React Router:** Declarative routing for React applications.
-- **Bootstrap:** Front-end framework for designing responsive and mobile-first websites.
+- 🗓️ **Event Discovery** – Browse and attend local or online events that support social causes.
+- ➕ **Event Creation** – Create new community events to inspire action and connection.
+- 📍 **Google Maps Integration** – View event locations directly within the app.
+- 💸 **Stripe Donations** – Securely donate to events or causes you care about.
+- ❤️ **Cause Creation** – Start your own cause to raise awareness and collect donations.
+- 🌐 **Activity Finder** – Discover online opportunities and initiatives aligned with your values.
 
-## Setup Instructions 📋
+---
 
-1. Clone this repository.
-2. Install dependencies using `npm install`.
-3. Ensure the backend server is running and accessible.
-4. Update API endpoint URLs in the frontend codebase if necessary.
-5. Start the development server with `npm start`.
+## 💻 Tech Stack
 
-Access the frontend at [here](https://group2app.netlify.app/)
+- **React** – For building dynamic and responsive user interfaces.
+- **Axios** – Handles API communication seamlessly.
+- **React Router** – Enables smooth, client-side navigation.
+- **Bootstrap** – Provides a clean and mobile-responsive design.
+- **Stripe API** – Powers secure and reliable donation processing.
+- **Google Maps API** – Displays real-time event locations.
 
-## Usage 🚀
+---
 
-- Browse events in your area.
-- Create new events to engage the community.
-- Delete events if no longer relevant.
-- Support local causes by making donations.
+## 🧰 Getting Started
 
-## Contributing 🤝
+To run this project locally:
 
-- **Xavier Rice**
-- **Nicole Rodriguez**
-- **Daryna Vershinina**
-- **Marcia Foster**
+```bash
+# 1. Clone the repository
+git clone https://github.com/yourusername/impactify-frontend.git
 
-Feel free to explore the codebase and contribute enhancements or bug fixes to make the Civic Engagement App even better!
+# 2. Navigate into the project folder
+cd impactify-frontend
+
+# 3. Install dependencies
+npm install
+
+# 4. Start the development server
+npm start
+
+```
+
+# 🖼️ Screenshot
+
+# 🏠 Homepage
+
+![Impactify Homepage](./src/assets/homepage.png "Impactify Homepage Screenshot")
+
+## 🚀 How to Use
+
+- **Browse Events** – Explore community and online events.
+- **View on Map** – See event locations instantly via Google Maps.
+- **Create Events** – Share new initiatives to bring people together.
+- **Create Causes** – Launch donation-driven causes to support your mission.
+- **Donate via Stripe** – Contribute securely to meaningful causes.
+- **Engage Online** – Find additional activities aligned with your values.
+
+---
+
+## 🧡 About Impactify
+
+**Impactify** was built to make civic engagement simple, collaborative, and empowering.  
+Through this project, I combined technology and social good — helping people connect, act, and create change in their communities.
+
+---
+
+## 🌱 Future Improvements
+
+- 🔐 **User authentication and profiles**
+- 🗂️ **Event filtering and search**
+- 📸 **Image uploads for event listings**
+- 📅 **Calendar integration**
+- 💬 **Community discussions and feedback**
