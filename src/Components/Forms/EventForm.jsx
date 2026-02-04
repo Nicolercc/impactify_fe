@@ -25,10 +25,11 @@ const EventForm = ({ user }) => {
 	const [lng, setLng] = useState(0);
 	const [stripeId, setStripeId] = useState("");
 	const [error, setError] = useState(false);
-	const [userId, setUserId] = useState(user.user_id);
+	// Allow events to be created without user - handle null/undefined user
+	const [userId, setUserId] = useState(user?.user_id || null);
 	const [user_keywords, setUserKeywords] = useState([]);
 	const [user_event, setUser_Event] = useState({
-		user_id: userId,
+		user_id: userId || null,
 		event_title: "",
 		event_date: "",
 		event_time: "",

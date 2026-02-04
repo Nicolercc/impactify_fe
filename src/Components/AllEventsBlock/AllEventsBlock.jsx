@@ -1,35 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import MainContent from "../MainContent";
-import Categories from "../CategoriesSection/CategoriesSection";
-import MobileMainContent from "../MainContent/MobileMainContent";
-import CarouselComponent from "../Carousel/Carousel";
-import LoadingState from "../LoadingState/LoadingState";
+import { IoSparkles, IoCalendarOutline, IoPeopleOutline } from "react-icons/io5";
+import { MdTrendingUp } from "react-icons/md";
+import "./AllEventsBlock.css";
 
 function AllEventsBlock({ backendEvents }) {
-	const [isMobile, setIsMobile] = useState(false);
-	const [loading, setLoading] = useState(false);
+	// Ensure backendEvents is always an array - normalize if needed
+	const safeEvents = useMemo(() => {
+		if (Array.isArray(backendEvents)) {
+			return backendEvents;
+		}
+		// If it's an object, try to find the array
+		if (backendEvents && typeof backendEvents === "object") {
+			if (Array.isArray(backendEvents.data)) {
+				return backendEvents.data;
+			}
+			// Search for any array property
+			for (const key in backendEvents) {
+				if (Array.isArray(backendEvents[key])) {
+					return backendEvents[key];
+				}
+			}
+		}
+		return [];
+	}, [backendEvents]);
 
-	useEffect(() => {git
-		const handleResize = () => {
-			setIsMobile(window.innerWidth <= 780);
-		};
-		handleResize();
-		window.addEventListener("resize", handleResize);
-		const timer = setTimeout(() => {
-			setLoading(false);
-		}, 2000);
-		return () => window.removeEventListener("resize", handleResize);
-		clearTimeout(timer);
-	}, []);
 	return (
-		<div className="mt-5">
-			{loading ? (
-				<span className="loader"></span>
-			) : isMobile ? (
-				<CarouselComponent backendEvents={backendEvents} />
-			) : (
-				<MainContent backendEvents={backendEvents} />
-			)}
+		<div className="all-events-block">
+			<div className="all-events-hero">
+				<div className="all-events-hero-icons" aria-hidden="true">
+					<IoSparkles className="hero-icon icon-1" />
+					<IoCalendarOutline className="hero-icon icon-2" />
+					<MdTrendingUp className="hero-icon icon-3" />
+					<IoPeopleOutline className="hero-icon icon-4" />
+				</div>
+
+				<h2 className="all-events-title">
+					Discover Upcoming Events
+				</h2>
+				<p className="all-events-subtitle">
+					Explore what’s happening near you and jump into the causes you care about.
+				</p>
+			</div>
+
+			<MainContent backendEvents={safeEvents} />
 		</div>
 	);
 }

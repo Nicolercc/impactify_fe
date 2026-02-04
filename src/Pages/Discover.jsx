@@ -26,9 +26,7 @@ function Discover() {
         <SearchBar />
 
         {isLoading ? (
-          <div className="loader-wrapper">
-            <div className="loader"></div>
-          </div>
+          <LoadingState message="Loading discover page..." />
         ) : (
           <>
             <div

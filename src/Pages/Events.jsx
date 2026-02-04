@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import axios from "axios";
 import Card from "../Components/Card/Card";
@@ -9,17 +9,17 @@ import MainContent from "../Components/MainContent";
 import CategoriesSection from "../Components/CategoriesSection/CategoriesSection";
 
 const Events = ({ backendEvents }) => {
-	const [clickedEvent, setClickedEvent] = useState(null)
+	const [clickedEvent, setClickedEvent] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [eventsData, setEventsData] = useState([]);
 	const [mobilizeEvents, setMobilizeEvents] = useState([]);
 	const [imageEvents, setImageEvents] = useState(null);
 	// const [fetchedEvent, setFetchedEvent] = useState([]);
-	const [selectedCategory, setSelectedCategory] = useState(null);
+	const [selectedCategory, setSelectedCategory] = useState("all");
 	const [allEvents, setAllEvents] = useState([]);
 	const navigate = useNavigate();
 
-	const backend = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+	const backend = "http://localhost:4000";
 
 	useEffect(() => {
 		const fetchEvents = async () => {
@@ -28,11 +28,85 @@ const Events = ({ backendEvents }) => {
 			let fetchedImageEvents = [];
 			try {
 				const resposeBackend = await axios.get(`${backend}/events`);
-				fetchEventsData = resposeBackend.data.data;
+				console.log("Events.jsx - Full API Response:", resposeBackend.data);
+				console.log(
+					"Events.jsx - response.data type:",
+					typeof resposeBackend.data,
+				);
+				console.log(
+					"Events.jsx - response.data.data:",
+					resposeBackend.data?.data,
+				);
+				console.log(
+					"Events.jsx - response.data.data type:",
+					typeof resposeBackend.data?.data,
+				);
+				console.log(
+					"Events.jsx - response.data.data keys:",
+					resposeBackend.data?.data
+						? Object.keys(resposeBackend.data.data)
+						: "N/A",
+				);
 
+				// Try different response structures
+				let events = null;
+				if (Array.isArray(resposeBackend.data?.data)) {
+					// Structure: {data: [...]}
+					events = resposeBackend.data.data;
+					console.log("Events.jsx - Found array directly in data.data");
+				} else if (Array.isArray(resposeBackend.data?.data?.data)) {
+					// Structure: {data: {data: [...]}}
+					events = resposeBackend.data.data.data;
+					console.log("Events.jsx - Found array in data.data.data");
+				} else if (Array.isArray(resposeBackend.data?.data?.events)) {
+					// Structure: {data: {events: [...]}}
+					events = resposeBackend.data.data.events;
+					console.log("Events.jsx - Found array in data.data.events");
+				} else if (Array.isArray(resposeBackend.data)) {
+					// Structure: [...]
+					events = resposeBackend.data;
+					console.log("Events.jsx - Found array directly in data");
+				} else {
+					// If data is an object, try to find an array property
+					const dataObj = resposeBackend.data?.data || resposeBackend.data;
+					console.log("Events.jsx - Searching in dataObj:", dataObj);
+					if (
+						dataObj &&
+						typeof dataObj === "object" &&
+						!Array.isArray(dataObj)
+					) {
+						// Look for any array property in the object
+						for (const key in dataObj) {
+							console.log(
+								`Events.jsx - Checking key "${key}":`,
+								dataObj[key],
+								"isArray:",
+								Array.isArray(dataObj[key]),
+							);
+							if (Array.isArray(dataObj[key])) {
+								events = dataObj[key];
+								console.log(
+									`Events.jsx - Found array in property "${key}":`,
+									events,
+									"Length:",
+									events.length,
+								);
+								break;
+							}
+						}
+					}
+				}
+
+				fetchEventsData = Array.isArray(events) ? events : [];
+				console.log("Events.jsx - Final processed events:", fetchEventsData);
+				console.log("Events.jsx - Final events count:", fetchEventsData.length);
+				if (fetchEventsData.length > 0) {
+					console.log("Events.jsx - First event sample:", fetchEventsData[0]);
+				}
 				setEventsData(fetchEventsData);
 			} catch (error) {
 				console.error("Error Fetching Backend Events:", error);
+				setEventsData([]); // Set to empty array on error
 			}
 			try {
 				const responseMoblize = await axios.get(
@@ -41,7 +115,7 @@ const Events = ({ backendEvents }) => {
 						params: {
 							location: "New York",
 						},
-					}
+					},
 				);
 
 				const events = responseMoblize.data.data;
@@ -64,7 +138,7 @@ const Events = ({ backendEvents }) => {
 							details: description,
 							featureImageUrl: feature_image_url,
 							location: false,
-						})
+						}),
 					);
 				setMobilizeEvents(events);
 				setImageEvents(fetchedImageEvents);
@@ -79,16 +153,20 @@ const Events = ({ backendEvents }) => {
 	console.log(imageEvents);
 
 	useEffect(() => {
-		setAllEvents([...eventsData]);
+		// Ensure eventsData is always an array before spreading
+		const safeEventsData = Array.isArray(eventsData) ? eventsData : [];
+		setAllEvents([...safeEventsData]);
 	}, [eventsData]);
 
 	const handleCardClick = (eventObj) => {
+		const eventId = eventObj?.event_id || eventObj?.id || eventObj?._id;
+		if (!eventId) return;
 
-		// axios.get(`${backend}/events/${eventObj.event_id}`).then(res => setFetchedEvent(res.data)).catch(err => console.log(err))
-		console.log(eventObj)
-		const selectedEvent = backendEvents.find((bkdEnvts) => bkdEnvts.event_id === eventObj.event_id);
-		setClickedEvent(selectedEvent)
-		navigate(`/discover/eventdetails/${eventObj.event_id}`, { state: { event: selectedEvent } });
+		// Prefer navigating with the object we already have (more reliable than re-finding).
+		setClickedEvent(eventObj);
+		navigate(`/discover/eventdetails/${eventId}`, {
+			state: { event: eventObj },
+		});
 		// navigate('/discover/test')
 	};
 
@@ -96,11 +174,27 @@ const Events = ({ backendEvents }) => {
 		setLoading(false);
 	};
 
-	const filteredEvents = selectedCategory
-		? allEvents.filter((event) =>
-			event.event_keywords.includes(selectedCategory)
-		)
-		: allEvents;
+	const filteredEvents = useMemo(() => {
+		const list = Array.isArray(allEvents) ? allEvents : [];
+		if (!selectedCategory || selectedCategory === "all") return list;
+
+		return list.filter((event) => {
+			const raw =
+				event?.event_keywords ??
+				event?.event_keyword ??
+				event?.event_keywords ??
+				[];
+			const keywords = Array.isArray(raw)
+				? raw
+				: typeof raw === "string"
+					? raw.split(",").map((s) => s.trim()).filter(Boolean)
+					: [];
+
+			return keywords
+				.map((k) => String(k).toLowerCase())
+				.includes(String(selectedCategory).toLowerCase());
+		});
+	}, [allEvents, selectedCategory]);
 
 	return (
 		<div className="" style={{ marginLeft: "5%", marginRight: "5%" }}>
@@ -111,10 +205,15 @@ const Events = ({ backendEvents }) => {
 			) : (
 				<Col>
 					<Row className="my-4 pb-4">
-						<CategoriesSection />
+						<CategoriesSection
+							value={selectedCategory}
+							onSelectCategory={setSelectedCategory}
+							title="Explore events by category"
+							subtitle="Tap a category to instantly filter the list."
+						/>
 					</Row>
 					<Row className="d-flex justify-content-center">
-						{allEvents.map((eventObj, index) => (
+						{filteredEvents.map((eventObj, index) => (
 							<Col
 								key={`${eventObj.id || index + "A"}-events-${index}` || index}
 								sm={6}

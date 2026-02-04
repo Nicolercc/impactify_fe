@@ -6,13 +6,15 @@ import CivicInfo from "./CivicInfo";
 const VoterModal = () => {
 	const [userResponse, setUserResponse] = useState(null);
 	const [show, setShow] = useState(true);
+
 	const handleClose = () => setShow(false);
 
-	const handleYes = () => {
+	const handleRegistered = () => {
 		setUserResponse("yes");
 		handleClose();
 	};
-	const handleNo = () => {
+
+	const handleNeedRegister = () => {
 		setUserResponse("no");
 		handleClose();
 	};
@@ -23,32 +25,40 @@ const VoterModal = () => {
 				show={show}
 				onHide={handleClose}
 				size="lg"
-				aria-labelledby="contained-modal-title-vcenter"
+				aria-labelledby="voter-modal-title"
 				centered
 			>
-				<Modal.Header closeButton className="">
-					<Modal.Title id="contained-modal-title-vcenter "></Modal.Title>
+				<Modal.Header closeButton>
+					<Modal.Title id="voter-modal-title">
+						Make your next election easier
+					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<h4 className="d-flex justify-content-center ">
-						Let's get you ready for voting season
-					</h4>
-					<p>
-						Every vote shapes our future, so we wanna know: Are you registered
-						to vote? Whether you need to register or are seeking to learn and
-						connect with local officials, we've got the resources to help you
-						make an impact.
+					<p className="mb-2">
+						Are you already registered to vote at your current address?
+					</p>
+					<p className="text-muted mb-0">
+						Choose an option below and we&apos;ll either take you to a trusted
+						tool to register, or help you look up your representatives and
+						polling details.
 					</p>
 				</Modal.Body>
-				<Modal.Footer className="d-flex justify-content-center ">
-					<Button variant="secondary mx-2 " onClick={handleNo}>
-						Register me
+				<Modal.Footer className="d-flex justify-content-center gap-3">
+					<Button
+						variant="outline-primary"
+						onClick={handleNeedRegister}
+					>
+						I need to register
 					</Button>
-					<Button variant="secondary mx-2" onClick={handleYes}>
-						I am registered
+					<Button
+						variant="primary"
+						onClick={handleRegistered}
+					>
+						I&apos;m already registered
 					</Button>
 				</Modal.Footer>
 			</Modal>
+
 			{userResponse === "yes" && <CivicInfo />}
 			{userResponse === "no" && <VoterTools />}
 		</>

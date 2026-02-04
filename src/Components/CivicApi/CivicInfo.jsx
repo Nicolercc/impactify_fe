@@ -11,13 +11,12 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
 import "./CivicInfo.css";
-import VoterModal from "./VoterModal";
 
 const CivicInfo = () => {
-	const [civicData, setCivicData] = useState(null);
 	const [usersLocation, setUsersLocation] = useState("");
 	const [civicOfficials, setCivicOfficials] = useState([]);
-	const [pollingData, setPollingData] = useState(null);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
 
 	const googleApiKey = import.meta.env.VITE_X_GOOGLE_API_KEY;
 
@@ -55,27 +54,35 @@ const CivicInfo = () => {
 					console.error("Error obtaining user location", error);
 				}
 			);
-		} else {
-			console.log("Geolocation is not supported by this browser.");
 		}
 	}, [setValue]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			if (usersLocation) {
-				try {
-					const civicUrl = `https://www.googleapis.com/civicinfo/v2/representatives?key=${googleApiKey}&address=${encodeURIComponent(usersLocation)}`;
-					const civicResponse = await axios.get(civicUrl);
-					setCivicData(civicResponse || []);
-					setCivicOfficials(civicResponse.data.officials || []);
+			if (!usersLocation) return;
 
-					const pollingUrl = `https://www.googleapis.com/civicinfo/v2/voterinfo?address=${encodeURIComponent(usersLocation)}&key=${googleApiKey}`;
-					const pollingResponse = await axios.get(pollingUrl);
-					console.log(pollingResponse);
-					setPollingData(pollingResponse || []);
-				} catch (error) {
-					console.error("Error fetching data:", error);
-				}
+			if (!googleApiKey) {
+				setError(
+					"We couldn’t reach the civic info service from this browser. You can still use official resources below."
+				);
+				setCivicOfficials([]);
+				return;
+			}
+
+			setLoading(true);
+			setError("");
+			try {
+				const civicUrl = `https://www.googleapis.com/civicinfo/v2/representatives?key=${googleApiKey}&address=${encodeURIComponent(usersLocation)}`;
+				const civicResponse = await axios.get(civicUrl);
+				setCivicOfficials(civicResponse.data.officials || []);
+			} catch (err) {
+				console.error("Error fetching civic data:", err);
+				setError(
+					"We couldn’t load your representatives right now. You can still look them up using the links below."
+				);
+				setCivicOfficials([]);
+			} finally {
+				setLoading(false);
 			}
 		};
 		fetchData();
@@ -112,7 +119,7 @@ const CivicInfo = () => {
 				<li
 					key={place_id}
 					onClick={handleSelect(suggestion)}
-					style={{ cursor: "pointer", listStyleType: "none" }}
+					className="civic-suggestion-item"
 				>
 					<strong>{main_text}</strong> <small>{secondary_text}</small>
 				</li>
@@ -120,52 +127,123 @@ const CivicInfo = () => {
 		});
 
 	return (
-		<Container className="main-content py-5 justify-content-center mx-5 ">
-			<Row className="justify-content-center">
-				<Col md={6}>
-					<Form.Group controlId="event_location" ref={ref} className="mb-4">
-						<Form.Label className="display-6 text-center mb-4">
-							Find all the representatives around you
-						</Form.Label>
-						<Form.Control
-							type="text"
-							value={value}
-							onChange={handleInput}
-							disabled={!ready}
-							placeholder="What's your address?"
-							className="mb-3"
-						/>
-						{status === "OK" && <ul>{renderSuggestions()}</ul>}
-					</Form.Group>
-				</Col>
-			</Row>
-			<Row className="row-cols-1 row-cols-md-3 g-4 justify-content-center">
-				{civicOfficials.map((official, index) => (
-					<Col key={index}>
-						<Card>
-							<Card.Body>
-								<Card.Title>{official.name}</Card.Title>
-								<Card.Subtitle className="mb-2 text-muted">
-									{official.party}
-								</Card.Subtitle>
-								<Card.Text>
-									Email: {official.email ? official.email : "N/A"}
-								</Card.Text>
-								<Card.Text>
-									Channel ID:{" "}
-									{official.channels && official.channels.length > 0
-										? official.channels[0].id
-										: "N/A"}
-								</Card.Text>
-								<Card.Link href={official.url ? official.url : "#"}>
-									FOR MORE INFO
-								</Card.Link>
-							</Card.Body>
-						</Card>
+		<section>
+			<Container className="civic-container py-5">
+				<Row className="justify-content-center">
+					<Col md={8} lg={7}>
+						<header className="civic-hero">
+							<h2 className="civic-hero-title">See who represents you</h2>
+							<p className="civic-hero-subtitle">
+								Search your address to find local, state, and federal officials
+								who speak for your community.
+							</p>
+						</header>
 					</Col>
-				))}
-			</Row>
-		</Container>
+				</Row>
+
+				<Row className="justify-content-center">
+					<Col md={8} lg={7}>
+						<Form.Group controlId="voter_address" ref={ref} className="mb-4">
+							<Form.Label className="civic-label">
+								Enter your address
+							</Form.Label>
+							<Form.Control
+								type="text"
+								value={value}
+								onChange={handleInput}
+								disabled={!ready}
+								placeholder="Start typing your street address"
+								className="civic-input"
+							/>
+							{status === "OK" && (
+								<ul className="civic-suggestions">{renderSuggestions()}</ul>
+							)}
+						</Form.Group>
+					</Col>
+				</Row>
+
+				<Row className="row-cols-1 row-cols-md-3 g-4 justify-content-center mt-2">
+					{loading && (
+						<Col md={8} lg={7}>
+							<p className="civic-empty">Looking up your representatives…</p>
+						</Col>
+					)}
+
+					{!loading && !error && civicOfficials.length === 0 && (
+						<Col md={8} lg={7}>
+							<p className="civic-empty">
+								Search an address above to see your representatives.
+							</p>
+						</Col>
+					)}
+
+					{error && (
+						<Col md={8} lg={7}>
+							<p className="civic-error">{error}</p>
+							<p className="civic-links">
+								You can also look up your elected officials on{" "}
+								<a
+									href="https://www.usa.gov/elected-officials"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									usa.gov
+								</a>
+								.
+							</p>
+						</Col>
+					)}
+
+					{civicOfficials.map((official, index) => {
+						const email =
+							official.emails && official.emails.length > 0
+								? official.emails[0]
+								: null;
+						const party = official.party || "Non‑partisan or not listed";
+						const primaryChannel =
+							official.channels && official.channels.length > 0
+								? official.channels[0]
+								: null;
+
+						return (
+							<Col key={index}>
+								<Card className="civic-official-card h-100">
+									<Card.Body>
+										<Card.Title className="civic-official-name">
+											{official.name}
+										</Card.Title>
+										<Card.Subtitle className="mb-2 civic-official-party">
+											{party}
+										</Card.Subtitle>
+										{email && (
+											<Card.Text className="civic-official-line">
+												Email:{" "}
+												<a href={`mailto:${email}`}>{email}</a>
+											</Card.Text>
+										)}
+										{primaryChannel && (
+											<Card.Text className="civic-official-line">
+												{primaryChannel.type}: {primaryChannel.id}
+											</Card.Text>
+										)}
+										{official.urls && official.urls.length > 0 && (
+											<Card.Link
+												href={official.urls[0]}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="civic-official-link"
+											>
+												More about this office
+											</Card.Link>
+										)}
+									</Card.Body>
+                                </Card>
+							</Col>
+						);
+					})}
+				</Row>
+			</Container>
+		</section>
 	);
 };
 

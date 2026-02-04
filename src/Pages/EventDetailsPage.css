@@ -1,233 +1,1214 @@
-/* Improving the overall layout and component spacing */
-.container-fluid {
-	padding: 20px;
+/* ============================================
+   OPTIMIZED EVENT DETAILS PAGE - CSS Grid Layout
+   Industry Standard Best Practices
+   Mobile-First Responsive Design
+   ============================================ */
+
+:root {
+	--primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	--brand-gradient: linear-gradient(135deg, #4e2855 0%, #6b3a7a 100%);
+	--shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+	--shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+	--shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+	--shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.2);
+	--border-radius: 16px;
+	--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	/* Reduced spacing by 33% */
+	--spacing-xs: 0.375rem;
+	--spacing-sm: 0.5rem;
+	--spacing-md: 0.75rem;
+	--spacing-lg: 1rem;
+	--spacing-xl: 1.5rem;
+	--spacing-2xl: 2rem;
 }
 
-/* Enhanced styling for the description area */
-.description-area {
-	background-color: rgba(
-		0,
-		0,
-		0,
-		0.7
-	); /* Darker background for better readability */
-	color: #fff;
-	padding: 20px;
-	border-radius: 8px;
-	margin-top: 20px; /* Adds some space between the image/map and the description */
+* {
+	box-sizing: border-box;
 }
 
-/* Custom button styles */
-.custom-signup-btn {
-	background-color: #4e2855;
-	border-color: #bc94c1;
-	color: #d5e673;
-}
-.custom-bg {
-	background-color: #4e2855; /* Replace #skyblue with your desired color */
-}
-.adjust-right {
-	margin-left: 150px; /* Adjust this value as needed */
-}
-.custom-signup-btn:hover {
-	background-color: #d5e673;
-	border-color: #bc9ec1;
-
-	background-color: #4e2855;
-	border-color: #bc94c1;
-	color: #d5e673;
-	font-weight: bold; /* Makes the button text stand out */
-	transition:
-		background-color 0.3s ease-in-out,
-		color 0.3s ease-in-out; /* Smooth transition for hover effect */
-}
-
-.span_color1 {
-	color: #bc94c1;
-}
-.custom-signup-btn:hover {
-	background-color: #d5e673;
-	border-color: #bc9ec1;
-	color: #4e2855; /* Changes text color on hover for contrast */
+/* Global rule to hide Stripe ErrorButton elements anywhere on the page */
+.ErrorButton-textContainer,
+.ErrorButton-text,
+[class*="ErrorButton-textContainer"],
+[class*="ErrorButton-text"],
+div.ErrorButton-textContainer,
+span.ErrorButton-text {
+	display: none !important;
+	visibility: hidden !important;
+	opacity: 0 !important;
+	height: 0 !important;
+	width: 0 !important;
+	overflow: hidden !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	font-size: 0 !important;
+	line-height: 0 !important;
+	position: absolute !important;
+	left: -9999px !important;
+	text-indent: -9999px !important;
+	clip: rect(0, 0, 0, 0) !important;
+	pointer-events: none !important;
 }
 
-/* Title and text color */
-.text-custom-color {
-	color: #d5e673;
-}
-
-/* --------------------------------------------------------------------------------------------------- */
-
-/* Map container styling for responsive design */
-.map-container {
-	width: 50%;
-	height: 50vh;
-	padding-bottom: 56.25%; /*set for aspect ratio stuff */
-	position: relative;
-
+.event-details-page {
+	min-height: 100vh;
+	background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+	animation: fadeIn 0.6s ease-out;
 	width: 100%;
-	max-width: 1200px;
-	height: 0;
-	padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+	overflow-x: hidden;
+	padding-bottom: var(--spacing-2xl);
 	position: relative;
-	border: 5px solid #bc94c1; /* Adds a border to the map for consistency */
-	border-radius: 8px; /* Rounded corners */
-	/* margin: 20px auto; */
-	overflow: hidden; /* Ensures the content fits within the borders */
 }
 
-/* .map-container iframe,
-.map-container object,
-.map-container embed {
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.event-hero {
+	position: relative;
+	width: 100%;
+	height: 60vh;
+	min-height: 400px;
+	max-height: 650px;
+	margin-bottom: var(--spacing-2xl);
+	overflow: hidden;
+	animation: slideDown 0.8s ease-out;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.event-hero-image-wrapper {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-} */
-/* --------------------------------------------------------------------------------------------------- */
-.text-center {
+	z-index: 1;
+}
+
+.event-hero-image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: brightness(0.7);
+	transition: transform 0.5s ease;
+}
+
+.event-hero:hover .event-hero-image {
+	transform: scale(1.05);
+}
+
+.event-hero-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+	z-index: 2;
+}
+
+.event-hero-content {
+	position: relative;
+	z-index: 3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	padding: var(--spacing-xl);
 	text-align: center;
+	max-width: 1400px;
+	margin: 0 auto;
 }
 
-.text-white {
-	color: #fff;
+.event-hero-title {
+	font-size: clamp(2rem, 5vw, 4.5rem);
+	font-weight: 800;
+	color: #ffffff;
+	text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+	margin: 0;
+	animation: fadeInUp 1s ease-out 0.3s both;
+	line-height: 1.2;
+	letter-spacing: -0.02em;
 }
 
-@media (max-width: 768px) {
-	.map-container {
-		padding-bottom: 75%;
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
 	}
-
-	@media (max-width: 768px) {
-		/* Improved handling for smaller screens */
-		.description-area {
-			margin-top: 15px;
-		}
-	}
-
-	/* Centered image container improvements */
-	.centered-image-container {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 200px;
-	}
-
-	.centered-image-container img {
-		max-width: 100%;
-		max-height: 100%;
-		object-fit: contain;
-
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 200px;
-	}
-
-	.centered-image-container img {
-		max-width: 100%;
-		max-height: 100%;
-		object-fit: contain;
-	}
-
-	/* Ensuring the image has a consistent border */
-	.image-border {
-		border: 3px solid #bc94c1;
-		box-sizing: border-box;
-		border: 3px solid #bc94c1;
-		box-sizing: border-box;
-		border-radius: 8px; /* Adds rounded corners to the image */
-	}
-	.rounded-button {
-		padding: 5px 15px; /* Smaller padding */
-		border-radius: 20px; /* Fully rounded edges */
-		font-size: 0.8em; /* Smaller font size */
-		margin: 0 10px; /* Space between buttons */
-	}
-
-	/* Applying the new styles to existing buttons */
-	.map-controls button {
-		/* Add your existing button styles here */
-		background-color: #4e2855;
-		border-color: #bc94c1;
-		color: #d5e673;
-		font-weight: bold; /* Makes the button text stand out */
-		transition:
-			background-color 0.3s ease-in-out,
-			color 0.3s ease-in-out; /* Smooth transition for hover effect */
-	}
-
-	/* Making sure buttons are centered within the map controls */
-	.map-controls {
-		text-align: center; /* Center buttons horizontally */
-		margin-bottom: 10px; /* Space below the buttons */
+	to {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
 
-/* ------------------------------------------------- */
-.image {
-	border-radius: 3%;
-}
-
-.map-row {
-	height: 30%;
-	width: 83%;
-	padding-bottom: 10%;
-}
+/* ============================================
+   CONTAINER - CSS Grid Layout
+   ============================================ */
 
 .event-details-container {
-	padding-left: 5%;
-	padding-right: 5%;
-}
-
-.attend-event {
-	border-color: #bc94c17e;
-	border: solid 1px #5a565b4f;
-	border-radius: 15px;
 	width: 100%;
-	/* height: 100%; */
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 0 clamp(1rem, 4vw, 3rem) var(--spacing-2xl) clamp(1rem, 4vw, 3rem);
+	padding-bottom: clamp(3rem, 8vw, 6rem);
+	animation: fadeIn 0.8s ease-out 0.2s both;
 }
 
-.btn-register {
-	width: 90%;
-}
-.btn-action {
-	width: 90%;
-	color: #bc94c17e;
-}
-
-.link {
-	text-decoration: underline;
+.event-content-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--spacing-2xl);
+	width: 100%;
+	margin-bottom: var(--spacing-2xl);
 }
 
-.terms-and-privacy {
+@media (min-width: 992px) {
+	.event-content-grid {
+		grid-template-columns: 1.75fr 1fr;
+		gap: var(--spacing-2xl);
+		align-items: start;
+	}
+}
+
+/* ============================================
+   MAIN CONTENT COLUMN
+   ============================================ */
+
+.event-details-column {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-xl);
+}
+
+/* ============================================
+   INFO CARDS GRID
+   ============================================ */
+
+.event-info-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--spacing-md);
+	width: 100%;
+}
+
+@media (min-width: 576px) {
+	.event-info-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 992px) {
+	.event-info-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+.event-info-card {
+	background: #ffffff;
+	border-radius: var(--border-radius);
+	padding: var(--spacing-lg);
+	box-shadow: var(--shadow-sm);
+	display: flex;
+	align-items: flex-start;
+	gap: var(--spacing-md);
+	transition: var(--transition);
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	animation: fadeInUp 0.6s ease-out both;
+}
+
+.event-info-card:nth-child(1) {
+	animation-delay: 0.1s;
+}
+
+.event-info-card:nth-child(2) {
+	animation-delay: 0.2s;
+}
+
+.event-info-card:nth-child(3) {
+	animation-delay: 0.3s;
+}
+
+.event-info-card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-md);
+	border-color: rgba(102, 126, 234, 0.3);
+}
+
+.event-info-icon {
+	font-size: 2rem;
+	color: #667eea;
+	flex-shrink: 0;
+	animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+	0%, 100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.1);
+	}
+}
+
+.event-info-content {
+	flex: 1;
+	min-width: 0;
+}
+
+.event-info-label {
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: #6c757d;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	margin: 0 0 var(--spacing-xs) 0;
+}
+
+.event-info-value {
+	font-size: 1rem;
+	font-weight: 600;
+	color: #2c3e50;
+	margin: 0;
+	line-height: 1.4;
+	word-wrap: break-word;
+}
+
+/* ============================================
+   ABOUT SECTION
+   ============================================ */
+
+.event-about-section {
+	background: #ffffff;
+	border-radius: var(--border-radius);
+	padding: var(--spacing-xl);
+	box-shadow: var(--shadow-sm);
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	animation: fadeInUp 0.6s ease-out 0.4s both;
+	width: 100%;
+}
+
+.event-section-title {
+	font-size: clamp(1.5rem, 3vw, 2rem);
+	font-weight: 700;
+	color: #2c3e50;
+	margin: 0 0 var(--spacing-lg) 0;
+	position: relative;
+	padding-bottom: var(--spacing-md);
 	text-align: center;
-	margin-top: 3rem;
 }
 
-.terms,
-.privacy {
-	white-space: nowrap; /* Prevents text from wrapping */
+.event-section-title::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 60px;
+	height: 3px;
+	background: var(--brand-gradient);
+	border-radius: 2px;
 }
 
-.terms::after {
-	content: ", "; /* Adds a comma after "Terms of Service" */
+.event-description {
+	font-size: clamp(1rem, 1.5vw, 1.125rem);
+	line-height: 1.8;
+	color: #495057;
+	text-align: center;
 }
 
-.privacy::before {
-	content: " and "; /* Adds "and" before "Privacy Policy" */
+.event-description p {
+	margin: 0;
+	white-space: pre-wrap;
 }
 
-/* Optional: Change colors */
-.terms {
-	color: blue; /* Change this to the desired color for Terms of Service */
+/* ============================================
+   ACCESSIBILITY SECTION
+   ============================================ */
+
+.event-accessibility-section {
+	width: 100%;
+	animation: fadeInUp 0.6s ease-out 0.5s both;
 }
 
-.privacy {
-	color: green; /* Change this to the desired color for Privacy Policy */
+.accessibility-card {
+	background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+	border-radius: var(--border-radius);
+	padding: var(--spacing-xl);
+	display: flex;
+	align-items: flex-start;
+	gap: var(--spacing-lg);
+	box-shadow: var(--shadow-sm);
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	transition: var(--transition);
 }
 
-.height-fit {
+.accessibility-card:hover {
+	box-shadow: var(--shadow-md);
+	transform: translateY(-2px);
+}
+
+.accessibility-icon {
+	font-size: 2rem;
+	color: #667eea;
+	flex-shrink: 0;
+}
+
+.accessibility-content {
+	flex: 1;
+	text-align: center;
+}
+
+.accessibility-title {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: #2c3e50;
+	margin: 0 0 var(--spacing-sm) 0;
+}
+
+.accessibility-text {
+	font-size: 1rem;
+	line-height: 1.7;
+	color: #6c757d;
+	margin: 0;
+}
+
+/* ============================================
+   REGISTRATION COLUMN - Sticky Sidebar
+   ============================================ */
+
+.event-registration-column {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-lg);
+	position: sticky;
+	top: 2rem;
 	height: fit-content;
+	max-height: calc(100vh - 4rem);
+	overflow-y: auto;
+	align-self: flex-start;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(102, 126, 234, 0.3) transparent;
+}
+
+.event-registration-column::-webkit-scrollbar {
+	width: 6px;
+}
+
+.event-registration-column::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.event-registration-column::-webkit-scrollbar-thumb {
+	background-color: rgba(102, 126, 234, 0.3);
+	border-radius: 3px;
+}
+
+.event-registration-column::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(102, 126, 234, 0.5);
+}
+
+@media (max-width: 991px) {
+	.event-registration-column {
+		position: static;
+		max-height: none;
+		overflow-y: visible;
+	}
+}
+
+/* ============================================
+   SUPPORT SECTION
+   ============================================ */
+
+.event-support-section {
+	width: 100%;
+	animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+.support-card {
+	background: var(--primary-gradient);
+	border-radius: var(--border-radius);
+	padding: var(--spacing-xl);
+	text-align: center;
+	box-shadow: var(--shadow-lg);
+	transition: var(--transition);
+	width: 100%;
+}
+
+.support-card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-xl);
+}
+
+.support-icon {
+	font-size: 3rem;
+	color: #ffffff;
+	margin-bottom: var(--spacing-md);
+	animation: heartbeat 1.5s ease-in-out infinite;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@keyframes heartbeat {
+	0%, 100% {
+		transform: scale(1);
+	}
+	25% {
+		transform: scale(1.1);
+	}
+	50% {
+		transform: scale(1);
+	}
+}
+
+.support-title {
+	font-size: clamp(1.125rem, 2vw, 1.5rem);
+	font-weight: 700;
+	color: #ffffff;
+	margin: 0 0 var(--spacing-lg) 0;
+}
+
+.stripe-wrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: var(--spacing-md);
+	position: relative;
+	overflow: hidden;
+}
+
+.stripe-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+	min-height: 50px;
+}
+
+.stripe-container > * {
+	position: relative;
+	z-index: 1;
+}
+
+.stripe-buy-wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Hide any error text that appears */
+.stripe-container::after,
+.stripe-wrapper::after {
+	display: none !important;
+}
+
+/* Completely hide stripe wrapper if it contains errors */
+.stripe-wrapper:has(*:contains("something went wrong")),
+.stripe-wrapper:has(*:contains("error")),
+.stripe-wrapper:has(*:contains("failed")) {
+	display: none !important;
+}
+
+/* Hide any text content that might be an error */
+.stripe-wrapper p,
+.stripe-wrapper div:not(.stripe-buy-wrapper):not(.stripe-container),
+.stripe-wrapper span {
+	font-size: 0 !important;
+	line-height: 0 !important;
+	height: 0 !important;
+	overflow: hidden !important;
+}
+
+/* Only show the actual button */
+.stripe-wrapper stripe-buy-button {
+	display: block !important;
+}
+
+.stripe-wrapper stripe-buy-button:has(*:contains("error")),
+.stripe-wrapper stripe-buy-button:has(*:contains("went wrong")) {
+	display: none !important;
+}
+
+/* Aggressively hide any error messages from Stripe buy button */
+stripe-buy-button::part(error),
+stripe-buy-button [class*="error"]:not([class*="button"]),
+stripe-buy-button [class*="Error"]:not([class*="Button"]),
+stripe-buy-button [id*="error"],
+stripe-buy-button [id*="Error"],
+stripe-buy-button p[class*="error"],
+stripe-buy-button div[class*="error"],
+stripe-buy-button span[class*="error"],
+stripe-buy-button p,
+stripe-buy-button div:not([class*="button"]),
+stripe-buy-button span:not([class*="button"]),
+/* Specific Stripe ErrorButton classes */
+.ErrorButton-textContainer,
+.ErrorButton-text,
+[class*="ErrorButton"],
+[class*="ErrorButton-textContainer"],
+[class*="ErrorButton-text"],
+div.ErrorButton-textContainer,
+span.ErrorButton-text {
+	display: none !important;
+	visibility: hidden !important;
+	opacity: 0 !important;
+	height: 0 !important;
+	width: 0 !important;
+	overflow: hidden !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	font-size: 0 !important;
+	line-height: 0 !important;
+	position: absolute !important;
+	left: -9999px !important;
+	text-indent: -9999px !important;
+	clip: rect(0, 0, 0, 0) !important;
+}
+
+/* Hide error messages in support section */
+.event-support-section p:contains("something went wrong"),
+.event-support-section div:contains("something went wrong"),
+.event-support-section span:contains("something went wrong"),
+.event-support-section *:contains("error"),
+/* Specific Stripe error classes */
+.event-support-section .ErrorButton-textContainer,
+.event-support-section .ErrorButton-text,
+.event-support-section [class*="ErrorButton"],
+.stripe-wrapper .ErrorButton-textContainer,
+.stripe-wrapper .ErrorButton-text,
+.stripe-wrapper [class*="ErrorButton"],
+.stripe-container .ErrorButton-textContainer,
+.stripe-container .ErrorButton-text,
+.stripe-container [class*="ErrorButton"] {
+	display: none !important;
+	visibility: hidden !important;
+	opacity: 0 !important;
+	height: 0 !important;
+	width: 0 !important;
+	overflow: hidden !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	font-size: 0 !important;
+	line-height: 0 !important;
+	position: absolute !important;
+	left: -9999px !important;
+	clip: rect(0, 0, 0, 0) !important;
+}
+
+/* Hide any text nodes with error messages */
+.stripe-wrapper * {
+	position: relative;
+}
+
+.stripe-wrapper p:empty,
+.stripe-wrapper div:empty {
+	display: none !important;
+}
+
+.support-fallback-btn {
+	width: 100%;
+	max-width: 280px;
+	padding: var(--spacing-md) var(--spacing-xl);
+	background: #ffffff;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-radius: 12px;
+	color: #ffffff;
+	font-size: 1rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: var(--transition);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	margin: var(--spacing-md) auto 0;
+	display: block;
+	text-align: center;
+}
+
+.support-fallback-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+	background: rgba(255, 255, 255, 0.95);
+	color: #667eea;
+	border-color: #ffffff;
+}
+
+.support-fallback-btn:active {
+	transform: translateY(0);
+}
+
+.support-fallback-btn:focus-visible {
+	outline: 3px solid rgba(255, 255, 255, 0.5);
+	outline-offset: 2px;
+}
+
+.support-fallback-alternative {
+	margin-top: var(--spacing-md);
+	background: rgba(255, 255, 255, 0.1);
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	font-size: 0.875rem;
+	padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.support-fallback-alternative:hover {
+	background: rgba(255, 255, 255, 0.2);
+	color: #ffffff;
+}
+
+.support-fallback-text {
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 0.875rem;
+	text-align: center;
+	margin: var(--spacing-sm) 0 0;
+	line-height: 1.5;
+}
+
+/* ============================================
+   REGISTRATION CARD
+   ============================================ */
+
+.event-registration-card {
+	background: #ffffff;
+	border-radius: var(--border-radius);
+	padding: var(--spacing-xl);
+	box-shadow: var(--shadow-md);
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	width: 100%;
+	animation: fadeInUp 0.6s ease-out 0.4s both;
+	overflow: visible;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	min-height: fit-content;
+}
+
+.event-registration-card::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 4px;
+	background: var(--brand-gradient);
+	border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.registration-title {
+	font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+	font-weight: 700;
+	color: #2c3e50;
+	margin: 0 0 var(--spacing-lg) 0;
+	text-align: center;
+	padding-bottom: var(--spacing-md);
+	border-bottom: 2px solid #f0f0f0;
+}
+
+.registration-form {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-md);
+	width: 100%;
+	flex: 1;
+	min-height: fit-content;
+}
+
+.form-row {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--spacing-md);
+	width: 100%;
+}
+
+@media (min-width: 576px) {
+	.form-row {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.form-group {
+	margin: 0;
+	width: 100%;
+}
+
+.form-input {
+	width: 100%;
+	padding: var(--spacing-md) var(--spacing-lg);
+	border: 2px solid #e9ecef;
+	border-radius: 12px;
+	font-size: 1rem;
+	transition: var(--transition);
+	background: #ffffff;
+	color: #2c3e50;
+	font-family: inherit;
+}
+
+.form-input:focus {
+	outline: none;
+	border-color: #667eea;
+	box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+	transform: translateY(-2px);
+	background: #fafbfc;
+}
+
+.form-input:hover:not(:focus) {
+	border-color: #ced4da;
+}
+
+.form-input::placeholder {
+	color: #adb5bd;
+	opacity: 0.8;
+}
+
+.sms-checkbox-group {
+	margin: var(--spacing-sm) 0;
+	width: 100%;
+	padding: var(--spacing-md);
+	background: #f8f9fa;
+	border-radius: 12px;
+	border: 1px solid #e9ecef;
+	transition: var(--transition);
+	flex-shrink: 0;
+}
+
+.sms-checkbox-group:hover {
+	background: #f0f0f0;
+	border-color: #667eea;
+}
+
+.form-checkbox {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--spacing-sm);
+	margin: 0;
+}
+
+.form-checkbox .form-check-input {
+	width: 1.25rem;
+	height: 1.25rem;
+	margin-top: 0.125rem;
+	cursor: pointer;
+	border: 2px solid #dee2e6;
+	transition: var(--transition);
+	flex-shrink: 0;
+}
+
+.form-checkbox .form-check-input:checked {
+	background-color: #667eea;
+	border-color: #667eea;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+}
+
+.form-checkbox .form-check-input:focus {
+	box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+	border-color: #667eea;
+}
+
+.form-checkbox .form-check-label {
+	font-size: 0.8125rem;
+	line-height: 1.5;
+	color: #495057;
+	cursor: pointer;
+	margin: 0;
+	flex: 1;
+}
+
+.register-btn {
+	width: 100%;
+	padding: var(--spacing-md) var(--spacing-xl);
+	background: var(--brand-gradient);
+	border: none;
+	border-radius: 12px;
+	color: #ffffff;
+	font-size: 1.125rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: var(--transition);
+	box-shadow: var(--shadow-md);
+	margin: var(--spacing-md) 0;
+	position: relative;
+	overflow: hidden;
+}
+
+.register-btn::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+	transition: left 0.5s;
+}
+
+.register-btn:hover::before {
+	left: 100%;
+}
+
+.register-btn:hover {
+	transform: translateY(-3px);
+	box-shadow: var(--shadow-lg);
+	background: linear-gradient(135deg, #6b3a7a 0%, #4e2855 100%);
+}
+
+.register-btn:active {
+	transform: translateY(-1px);
+}
+
+.register-btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	transform: none;
+}
+
+.form-footer {
+	margin-top: var(--spacing-sm);
+	text-align: center;
+	width: 100%;
+	padding-top: var(--spacing-md);
+	border-top: 1px solid #e9ecef;
+}
+
+.form-footer-text {
+	font-size: 0.8125rem;
+	color: #6c757d;
+	line-height: 1.6;
+	margin: 0;
+}
+
+.form-link {
+	color: #667eea;
+	text-decoration: none;
+	font-weight: 600;
+	transition: var(--transition);
+	position: relative;
+}
+
+.form-link::after {
+	content: "";
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background: #667eea;
+	transition: width 0.3s ease;
+}
+
+.form-link:hover {
+	color: #764ba2;
+}
+
+.form-link:hover::after {
+	width: 100%;
+}
+
+.form-contact-section {
+	margin-top: var(--spacing-md);
+	padding-top: var(--spacing-md);
+	border-top: 1px solid #e9ecef;
+	text-align: center;
+	width: 100%;
+	padding-bottom: var(--spacing-xs);
+}
+
+.form-contact-link {
+	color: #667eea;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 0.9375rem;
+	transition: var(--transition);
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-xs);
+	position: relative;
+}
+
+.form-contact-link::after {
+	content: "";
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background: #667eea;
+	transition: width 0.3s ease;
+}
+
+.form-contact-link:hover {
+	color: #764ba2;
+}
+
+.form-contact-link:hover::after {
+	width: 100%;
+}
+
+/* ============================================
+   MODAL
+   ============================================ */
+
+.thank-you-modal .modal-content {
+	border-radius: var(--border-radius);
+	border: none;
+	box-shadow: var(--shadow-xl);
+	animation: modalSlideIn 0.4s ease-out;
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+@keyframes modalSlideIn {
+	from {
+		opacity: 0;
+		transform: translateY(-20px) scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+.modal-header-custom {
+	border-bottom: 1px solid #e9ecef;
+	padding: var(--spacing-lg) var(--spacing-xl);
+	text-align: center;
+}
+
+.modal-header-custom .modal-title {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #2c3e50;
+	width: 100%;
+}
+
+.modal-body-custom {
+	padding: var(--spacing-xl);
+	text-align: center;
+}
+
+.thank-you-content {
+	text-align: center;
+}
+
+.thank-you-icon {
+	font-size: 4rem;
+	color: #667eea;
+	margin: 0 auto var(--spacing-md);
+	display: block;
+	animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.thank-you-content p {
+	font-size: 1.125rem;
+	color: #495057;
+	line-height: 1.6;
+	margin: 0;
+}
+
+.modal-footer-custom {
+	border-top: 1px solid #e9ecef;
+	padding: var(--spacing-lg) var(--spacing-xl);
+	display: flex;
+	justify-content: center;
+}
+
+.modal-close-btn {
+	padding: var(--spacing-sm) var(--spacing-xl);
+	background: var(--brand-gradient);
+	border: none;
+	border-radius: 8px;
+	color: #ffffff;
+	font-weight: 600;
+	transition: var(--transition);
+	min-width: 120px;
+}
+
+.modal-close-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	background: linear-gradient(135deg, #6b3a7a 0%, #4e2855 100%);
+}
+
+/* ============================================
+   LOADER
+   ============================================ */
+
+.loader-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 80vh;
+	width: 100%;
+}
+
+.loader {
+	width: 60px;
+	height: 60px;
+	border: 4px solid #f3f3f3;
+	border-top: 4px solid #667eea;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* ============================================
+   ERROR STATE
+   ============================================ */
+
+.event-details-error {
+	min-height: 80vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--spacing-xl);
+	width: 100%;
+}
+
+.error-content {
+	text-align: center;
+	max-width: 600px;
+	animation: fadeInUp 0.6s ease-out;
+	margin: 0 auto;
+}
+
+.error-content h2 {
+	font-size: clamp(1.75rem, 4vw, 2.5rem);
+	font-weight: 700;
+	color: #2c3e50;
+	margin: 0 0 var(--spacing-md) 0;
+}
+
+.error-content p {
+	font-size: 1.125rem;
+	color: #6c757d;
+	margin: 0 0 var(--spacing-xl) 0;
+	line-height: 1.6;
+}
+
+.error-btn {
+	padding: var(--spacing-md) var(--spacing-xl);
+	background: var(--brand-gradient);
+	border: none;
+	border-radius: 12px;
+	color: #ffffff;
+	font-weight: 600;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: var(--transition);
+	box-shadow: var(--shadow-md);
+	min-width: 200px;
+}
+
+.error-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-lg);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - Mobile First
+   ============================================ */
+
+@media (max-width: 575px) {
+	.event-hero {
+		height: 45vh;
+		min-height: 300px;
+		margin-bottom: var(--spacing-xl);
+	}
+
+	.event-details-container {
+		padding: 0 var(--spacing-md) clamp(3rem, 8vw, 6rem);
+	}
+
+	.event-info-card {
+		padding: var(--spacing-md);
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.event-info-icon {
+		margin: 0 auto;
+	}
+
+	.event-about-section,
+	.event-registration-card {
+		padding: var(--spacing-lg);
+	}
+
+	.accessibility-card {
+		flex-direction: column;
+		text-align: center;
+		padding: var(--spacing-lg);
+	}
+
+	.event-registration-column {
+		margin-bottom: var(--spacing-2xl);
+	}
+}
+
+@media (min-width: 576px) and (max-width: 991px) {
+	.event-hero {
+		height: 55vh;
+		min-height: 350px;
+	}
+}
+
+@media (min-width: 992px) {
+	.event-hero {
+		height: 60vh;
+		min-height: 400px;
+	}
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+	outline: 3px solid #667eea;
+	outline-offset: 2px;
 }

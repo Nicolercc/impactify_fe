@@ -19,6 +19,13 @@ function Homepage({ backendEvents }) {
 	const [isResponsive, setIsResponsive] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);
 
+	// Debug: Log what Homepage receives
+	useEffect(() => {
+		console.log("Homepage - received backendEvents:", backendEvents);
+		console.log("Homepage - is array?", Array.isArray(backendEvents));
+		console.log("Homepage - length:", backendEvents?.length);
+	}, [backendEvents]);
+
 	const adaptiveWidth = useAdaptiveTriggers({
 		onSmallEnter: () =>
 			console.log("its small, apply small parallax props now"),
@@ -140,7 +147,7 @@ function Homepage({ backendEvents }) {
 				</ParallaxLayer>
 				{/* page 1 */}
 				<ParallaxLayer
-					offset={0.7}
+					offset={0.6}
 					speed={0}
 					factor={1.1}
 					style={{
@@ -160,7 +167,7 @@ function Homepage({ backendEvents }) {
 				</ParallaxLayer>
 				{/* page 2 */}
 				<ParallaxLayer
-					offset={1.64}
+					offset={1.5}
 					speed={0}
 					factor={1}
 					className=" d-flex justify-content-center"
@@ -178,7 +185,7 @@ function Homepage({ backendEvents }) {
 				</ParallaxLayer>
 				{/* page 3 */}
 				<ParallaxLayer
-					offset={2.47}
+					offset={2.43}
 					speed={0}
 					factor={0.5}
 					className=" d-flex justify-content-center"
@@ -191,10 +198,12 @@ function Homepage({ backendEvents }) {
 					offset={2.9}
 					speed={0}
 					factor={1.2}
-					className=" d-flex justify-content-center"
+					className=" d-flex  justify-content-center"
 					style={{ backgroundColor: "white" }}
 				>
-					<DonationsLayout backendEvents={backendEvents} />
+					<div className="py-10">
+						<DonationsLayout backendEvents={backendEvents} />
+					</div>
 				</ParallaxLayer>
 
 				<ParallaxLayer offset={4.01} factor={1.1}>
