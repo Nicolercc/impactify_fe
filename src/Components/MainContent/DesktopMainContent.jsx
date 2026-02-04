@@ -11,6 +11,9 @@ function MainContent({ backendEvents }) {
 	const [startIndex, setStartIndex] = useState(0);
 	const eventsPerPage = 4;
 
+	// Ensure backendEvents is always an array
+	const safeBackendEvents = Array.isArray(backendEvents) ? backendEvents : [];
+
 	const handleNext = () => {
 		setStartIndex((prevIndex) => prevIndex + eventsPerPage);
 	};
@@ -21,7 +24,7 @@ function MainContent({ backendEvents }) {
 
 	const handleContentClick = (eventObj) => {
 		console.log("you clicked me", eventObj);
-		let selected = backendEvents.find(
+		let selected = safeBackendEvents.find(
 			(bkdEnvts) => bkdEnvts.event_id === eventObj.event_id
 		);
 		setSelectedEvent(selected);
@@ -31,52 +34,69 @@ function MainContent({ backendEvents }) {
 	};
 
 	return (
-		<div className="mt-5" style={{ width: "100vw" }}>
+		<div className="mt-5" style={{ width: "100%", maxWidth: "1400px", margin: "0 auto", padding: "20px" }}>
 			<div className="m-4">
 				<div className="position-relative d-block">
-					<div className="d-flex justify-content-between align-items-center m-3">
-						<div className="fw-bold fs-4">Most popular events</div>
-						<div>
-							<Button
-								onClick={handlePrev}
-								disabled={startIndex === 0}
-								className="mx-1"
-								style={{ borderRadius: "60px" }}
-							>
-								<IoIosArrowBack />
-							</Button>
-							<Button
-								onClick={handleNext}
-								disabled={startIndex + eventsPerPage >= backendEvents.length}
-								className="mx-1"
-								style={{ borderRadius: "80px" }}
-							>
-								<IoIosArrowForward />
-							</Button>
-						</div>
+					<div className="d-flex justify-content-between align-items-center m-3 mb-4">
+						<div className="fw-bold fs-3">All Events ({safeBackendEvents.length})</div>
 					</div>
 
-					<Row style={{ paddingRight: "0px", paddingLeft: "0px" }}>
-						{backendEvents
-							?.slice(startIndex, startIndex + eventsPerPage)
-							.map((eventObj) => (
-								<Col
-									key={eventObj.event_id + "main"}
+					{safeBackendEvents.length === 0 ? (
+						<Row>
+							<Col xs={12} className="text-center p-5">
+								<div className="p-4">
+									<p className="fs-5 text-muted">
+										No events available at the moment. Please check back later.
+									</p>
+								</div>
+							</Col>
+						</Row>
+					) : (
+						<Row style={{ paddingRight: "0px", paddingLeft: "0px" }} className="g-4">
+							{safeBackendEvents.map((eventObj, index) => {
+								const eventId =
+									eventObj.event_id || eventObj.id || eventObj._id || index;
+								const title =
+									eventObj.event_title ||
+									eventObj.title ||
+									eventObj.name ||
+									"Untitled Event";
+								const imageSrc =
+									eventObj.event_photo ||
+									eventObj.image ||
+									eventObj.image_url ||
+									eventObj.photo ||
+									eventObj.featureImageUrl ||
+									eventObj.featured_image_url ||
+									eventObj.logo_url ||
+									"https://via.placeholder.com/300x200?text=No+Image";
+								const text =
+									eventObj.event_details ||
+									eventObj.details ||
+									eventObj.description ||
+									eventObj.summary ||
+									"";
+
+								return (
+									<Col
+										key={`${eventId}-desktop-main-${index}`}
 									xs={12}
 									sm={6}
-									// md={4}
+										md={4}
 									lg={3}
-									className=""
+										className="mb-4"
 								>
 									<Card
-										title={eventObj.event_title}
-										imageSrc={eventObj.event_photo}
-										text={eventObj.event_details}
+											title={title}
+											imageSrc={imageSrc}
+											text={text}
 										onClick={() => handleContentClick(eventObj)}
 									/>
 								</Col>
-							))}
+								);
+							})}
 					</Row>
+					)}
 				</div>
 			</div>
 		</div>

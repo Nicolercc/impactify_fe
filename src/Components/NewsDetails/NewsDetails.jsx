@@ -22,7 +22,7 @@ const NewsDetails = () => {
 	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
 	const location = useLocation();
-	const { news, article } = location.state;
+	const { news, article } = location.state || {};
 
 	useEffect(() => {
 		const fetchEvents = async () => {
@@ -69,7 +69,7 @@ const NewsDetails = () => {
 	};
 
 	// console.log(article)
-	const paragraphs = news?.news_content.split(/\n\n/);
+	const paragraphs = news?.news_content?.split(/\n\n/) || [];
 	const articleText = article?.content.repeat(16);
 	// console.log(articleText)
 	return (

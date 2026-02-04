@@ -1,4 +1,6 @@
 /*---------------------------- Entire App ----------------------------*/
+/* import './responsive-fixes.css'; */
+
 body {
 	overflow-x: hidden;
 	/* font-family: serif; */

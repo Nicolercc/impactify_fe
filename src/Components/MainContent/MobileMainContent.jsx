@@ -11,6 +11,9 @@ function MainContent({ backendEvents }) {
 	const [startIndex, setStartIndex] = useState(0);
 	const eventsPerPage = 1;
 
+	// Ensure backendEvents is always an array
+	const safeBackendEvents = Array.isArray(backendEvents) ? backendEvents : [];
+
 	const handleNext = () => {
 		setStartIndex((prevIndex) => prevIndex + eventsPerPage);
 	};
@@ -21,7 +24,7 @@ function MainContent({ backendEvents }) {
 
 	const handleContentClick = (eventObj) => {
 		console.log("you clicked me", eventObj);
-		let selected = backendEvents.find(
+		let selected = safeBackendEvents.find(
 			(bkdEnvts) => bkdEnvts.event_id === eventObj.event_id
 		);
 		setSelectedEvent(selected);
@@ -47,7 +50,9 @@ function MainContent({ backendEvents }) {
 							</Button>
 							<Button
 								onClick={handleNext}
-								disabled={startIndex + eventsPerPage >= backendEvents.length}
+								disabled={
+									startIndex + eventsPerPage >= safeBackendEvents.length
+								}
 								className="mx-1"
 								style={{ borderRadius: "80px" }}
 							>
@@ -57,25 +62,49 @@ function MainContent({ backendEvents }) {
 					</div>
 
 					<Row style={{ paddingRight: "0px", paddingLeft: "0px" }}>
-						{backendEvents
-							?.slice(startIndex, startIndex + eventsPerPage)
-							.map((eventObj) => (
-								<Col
-									key={eventObj.event_id + "main"}
+						{safeBackendEvents
+							.slice(startIndex, startIndex + eventsPerPage)
+							.map((eventObj, index) => {
+								const eventId =
+									eventObj.event_id || eventObj.id || eventObj._id || index;
+								const title =
+									eventObj.event_title ||
+									eventObj.title ||
+									eventObj.name ||
+									"Untitled Event";
+								const imageSrc =
+									eventObj.event_photo ||
+									eventObj.image ||
+									eventObj.image_url ||
+									eventObj.photo ||
+									eventObj.featureImageUrl ||
+									eventObj.featured_image_url ||
+									eventObj.logo_url ||
+									"https://via.placeholder.com/300x200?text=No+Image";
+								const text =
+									eventObj.event_details ||
+									eventObj.details ||
+									eventObj.description ||
+									eventObj.summary ||
+									"";
+
+								return (
+									<Col
+										key={`${eventId}-mobile-main-${index}`}
 									xs={12}
 									sm={6}
-									// md={4}
 									lg={3}
 									className=""
 								>
 									<Card
-										title={eventObj.event_title}
-										imageSrc={eventObj.event_photo}
-										text={eventObj.event_details}
+											title={title}
+											imageSrc={imageSrc}
+											text={text}
 										onClick={() => handleContentClick(eventObj)}
 									/>
 								</Col>
-							))}
+								);
+							})}
 					</Row>
 				</div>
 			</div>

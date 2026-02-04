@@ -1,10 +1,182 @@
-.background_only {
-    margin: 0; /* Removes the margin around the body */
-    padding: 0; /* Removes padding around the body */
-    background-image: url('../../assets/facts1.jpg'); /* Path to your image */
-    background-position: center; /* Centers the background image */
-    background-size: cover; /* Ensures the image covers the entire area */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    height: 100vh; /* Makes sure the body covers the whole viewport height */
-    width: 100vw; /* Ensures the body covers the whole viewport width */
-  }
+ .facts-background {
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	width: 100%;
+	max-width: 100vw;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	background:
+		radial-gradient(circle at 0% 0%, rgba(99, 15, 118, 0.25), transparent 55%),
+		radial-gradient(circle at 100% 100%, rgba(139, 31, 163, 0.25), transparent 55%),
+		linear-gradient(135deg, #05020a, #13061c, #05020a);
+}
+
+.facts-background::before {
+	content: "";
+	position: absolute;
+	inset: -20%;
+	
+	background-position: center;
+	background-size: cover;
+	opacity: 0.18;
+	filter: blur(4px);
+	transform: scale(1.05);
+}
+
+.facts-background::after {
+	content: "";
+	position: absolute;
+	inset: -30%;
+	background: conic-gradient(
+		from 180deg,
+		rgba(201, 69, 165, 0.18),
+		transparent,
+		rgba(99, 15, 118, 0.2),
+		transparent,
+		rgba(201, 69, 165, 0.18)
+	);
+	opacity: 0.7;
+	mix-blend-mode: screen;
+	animation: factsGlow 18s linear infinite;
+}
+
+@keyframes factsGlow {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.facts-overlay {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 3.75rem 1.75rem 3.25rem;
+	background: radial-gradient(
+			circle at top left,
+			rgba(250, 207, 255, 0.14),
+			transparent 60%
+		),
+		radial-gradient(
+			circle at bottom right,
+			rgba(144, 122, 255, 0.16),
+			transparent 60%
+		),
+		linear-gradient(135deg, rgba(11, 5, 20, 0.96), rgba(19, 8, 32, 0.98));
+	border-radius: 28px;
+	box-shadow:
+		0 26px 60px rgba(0, 0, 0, 0.55),
+		0 0 0 1px rgba(248, 231, 255, 0.12);
+	backdrop-filter: blur(12px);
+	color: #f9f5ff;
+}
+
+.facts-header {
+	text-align: center;
+	max-width: 680px;
+	margin: 0 auto 2.5rem;
+}
+
+.facts-title {
+	margin: 0;
+	font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	background: linear-gradient(120deg, #f9f5ff, #fbb6ff);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.facts-subtitle {
+	margin-top: 0.85rem;
+	font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+	line-height: 1.7;
+	color: rgba(235, 226, 255, 0.9);
+	max-width: 54ch;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.faq-section {
+	width: 100%;
+}
+
+.faq-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1rem;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.faq-item {
+	border-radius: 18px;
+	padding: 0.9rem 1rem;
+	background: rgba(33, 11, 52, 0.95);
+	border: 1px solid rgba(248, 231, 255, 0.15);
+	color: #f9f5ff;
+}
+
+.faq-item[open] {
+	background: rgba(46, 18, 71, 0.97);
+	border-color: rgba(250, 207, 255, 0.7);
+}
+
+.faq-question {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0.5rem;
+	list-style: none;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 0.96rem;
+}
+
+.faq-question::-webkit-details-marker {
+	display: none;
+}
+
+.faq-chevron {
+	font-size: 1.1rem;
+	line-height: 1;
+	transition: transform 0.18s ease;
+}
+
+.faq-item[open] .faq-chevron {
+	transform: rotate(45deg);
+}
+
+.faq-answer {
+	margin: 0.5rem 0 0.1rem;
+	font-size: 0.88rem;
+	line-height: 1.65;
+	color: rgba(239, 231, 255, 0.95);
+}
+
+@media (max-width: 768px) {
+	.facts-overlay {
+		padding: 2.75rem 1.25rem 2.5rem;
+	}
+
+	.faq-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.faq-chevron,
+	.facts-background::after {
+		transition: none;
+		animation: none !important;
+	}
+}

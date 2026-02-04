@@ -14,7 +14,6 @@ const AutoComplete = ({ setLocation, setLat, setLng, lat, lng }) => {
 		setValue,
 		clearSuggestions,
 	} = usePlacesAutocomplete({
-		callbackName: "YOUR_CALLBACK_NAME",
 		requestOptions: {
 			/* Define search scope here */
 		},
@@ -66,18 +65,55 @@ const AutoComplete = ({ setLocation, setLat, setLng, lat, lng }) => {
 		});
 
 	return (
-		<Form.Group className="mb-3 fs-5" controlId="event_location" ref={ref}>
-			<Form.Label className="">Location</Form.Label>
-			<Form.Control
+		<div ref={ref} style={{ width: "100%", position: "relative" }}>
+			<input
 				type="text"
 				value={value}
 				onChange={handleInput}
-				placeholder="Location"
+				placeholder="Search for a location..."
 				disabled={!ready}
-				style={{ maxWidth: "260px" }}
+				className="form-control"
+				style={{
+					width: "100%",
+					padding: "0.875rem 1rem",
+					fontSize: "0.9375rem",
+					color: "#1a1a1a",
+					background: "#ffffff",
+					border: "2px solid #e9ecef",
+					borderRadius: "8px",
+					transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+					fontFamily: "inherit",
+				}}
+				onFocus={(e) => {
+					e.target.style.borderColor = "#630f76";
+					e.target.style.boxShadow = "0 0 0 3px rgba(99, 15, 118, 0.1)";
+				}}
+				onBlur={(e) => {
+					e.target.style.borderColor = "#e9ecef";
+					e.target.style.boxShadow = "none";
+				}}
 			/>
-			{status === "OK" && <ul>{renderSuggestions()}</ul>}
-		</Form.Group>
+			{status === "OK" && (
+				<ul
+					style={{
+						listStyle: "none",
+						padding: 0,
+						margin: "0.5rem 0 0",
+						background: "#ffffff",
+						border: "1px solid #e9ecef",
+						borderRadius: "8px",
+						boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+						maxHeight: "200px",
+						overflowY: "auto",
+						zIndex: 1000,
+						position: "absolute",
+						width: "100%",
+					}}
+				>
+					{renderSuggestions()}
+				</ul>
+			)}
+		</div>
 	);
 };
 

@@ -1,125 +1,80 @@
-import React, { useState } from "react";
-
-import { useNavigate, Link } from "react-router-dom";
-
-import { Row, Col } from "react-bootstrap";
-import { GiWorld } from "react-icons/gi";
-import { BiDonateHeart } from "react-icons/bi";
-import { MdOutlinePolicy, MdAllInbox } from "react-icons/md";
-import { FaPeopleGroup } from "react-icons/fa6";
-import { IoLocationOutline, IoCalendarOutline } from "react-icons/io5";
+import React, { useMemo, useState } from "react";
+import {
+	MdAllInbox,
+	MdOutlinePolicy,
+	MdEco,
+	MdGroups,
+	MdVolunteerActivism,
+	MdHowToVote,
+	MdDiversity3,
+} from "react-icons/md";
+import { IoSparkles } from "react-icons/io5";
 import "./Categories.css";
 
-function CategoriesSection({ onSelectCategory }) {
-	const navigate = useNavigate();
-	const [selectedCategory, setSelectedCategory] = useState(null);
+const DEFAULT_EVENT_CATEGORIES = [
+	{ id: "all", label: "All", Icon: MdAllInbox },
+	{ id: "activism", label: "Activism", Icon: MdVolunteerActivism },
+	{ id: "community", label: "Community", Icon: MdGroups },
+	{ id: "politics", label: "Politics", Icon: MdOutlinePolicy },
+	{ id: "environment", label: "Environment", Icon: MdEco },
+	{ id: "equality", label: "Equality", Icon: MdDiversity3 },
+	{ id: "voting", label: "Voting", Icon: MdHowToVote },
+];
 
-	// const handleClick = (category) => {
-	// 	onSelectCategory(category);
-	// 	navigateCategories(category);
-	// };
+function CategoriesSection({
+	title = "Explore by category",
+	subtitle = "Filter events to find what matters to you.",
+	categories,
+	value,
+	defaultValue = "all",
+	onChange,
+	onSelectCategory, // backwards-compatible prop name
+}) {
+	const items = useMemo(
+		() => (Array.isArray(categories) && categories.length ? categories : DEFAULT_EVENT_CATEGORIES),
+		[categories],
+	);
 
-	// const testClick = (category) => {
-	// 	console.log("ME" + category);
-	// };
+	const isControlled = value !== undefined;
+	const [internalValue, setInternalValue] = useState(defaultValue);
+	const selected = isControlled ? value : internalValue;
+
+	const handleSelect = (nextId) => {
+		if (!isControlled) setInternalValue(nextId);
+		onChange?.(nextId);
+		onSelectCategory?.(nextId);
+	};
 
 	return (
-		<div className="">
-			<Row className=" d-flex justify-content-center">
-				<div className="py-4 mb-3 fs-3 d-flex justify-content-center ">
-					Explore what's popular
+		<section className="categories-section" aria-label="Event categories">
+			<div className="categories-header">
+				<div className="categories-title-row">
+					<IoSparkles className="categories-title-icon" aria-hidden="true" />
+					<h2 className="categories-title">{title}</h2>
 				</div>
+				{subtitle ? <p className="categories-subtitle">{subtitle}</p> : null}
+							</div>
 
-				<Col sm={10} xs={12} className="text-center">
-					<div className="categories-container d-flex justify-content-center ">
-						<Row className="category-item">
-							<div
-								className={`category-icon-text-container ${
-									selectedCategory === "Local" ? "selected" : ""
-								}`}
-							>
-								<IoLocationOutline
-									style={{ fontSize: "44px", color: "#630f76" }}
-								/>
-								<div className="fs-6 fw-semibold">Local</div>
+			<div className="categories-chips" role="tablist" aria-label="Filter events by category">
+				{items.map(({ id, label, Icon }) => {
+					const active = selected === id;
+					return (
+						<button
+							key={id}
+							type="button"
+							role="tab"
+							aria-selected={active}
+							className={`categories-chip ${active ? "active" : ""}`}
+							onClick={() => handleSelect(id)}
+						>
+							<Icon className="categories-chip-icon" aria-hidden="true" />
+							<span className="categories-chip-label">{label}</span>
+							<span className="categories-chip-glow" aria-hidden="true" />
+						</button>
+					);
+				})}
 							</div>
-						</Row>
-
-						<Row>
-							<div
-								key={"Popular-2"}
-								className={`mx-3 ${
-									selectedCategory === "Coming Up" ? "selected" : ""
-								}`}
-							>
-								<IoCalendarOutline
-									style={{ fontSize: "44px", color: "#630f76" }}
-								/>
-								<div className="fs-6 fw-semibold">Coming up</div>
-							</div>
-						</Row>
-						<Row>
-							<div
-								to={"discover/news"}
-								key={"Popular-3"}
-								className={`mx-3 ${
-									selectedCategory === "Global Issues" ? "selected" : ""
-								}`}
-							>
-								<GiWorld style={{ fontSize: "44px", color: "#630f76" }} />
-								<div className="fs-6 fw-semibold">Global</div>
-							</div>
-						</Row>
-						<Row>
-							<div
-								key={"Popular-4"}
-								className={`mx-3 ${
-									selectedCategory === "Politics" ? "selected" : ""
-								}`}
-							>
-								<MdOutlinePolicy
-									style={{ fontSize: "44px", color: "#630f76" }}
-								/>
-								<div className="fs-6 fw-semibold">Politics</div>
-							</div>
-						</Row>
-						<Row>
-							<div
-								key={"Popular-5"}
-								className={`mx-3 ${
-									selectedCategory === "Community" ? "selected" : ""
-								}`}
-							>
-								<FaPeopleGroup style={{ fontSize: "44px", color: "#630f76" }} />
-								<div className="fs-6 fw-semibold">Community</div>
-							</div>
-						</Row>
-						<Row>
-							<div
-								key={"Popular-6"}
-								className={`mx-3 ${
-									selectedCategory === "Donation" ? "selected" : ""
-								}`}
-							>
-								<BiDonateHeart style={{ fontSize: "44px", color: "#630f76" }} />
-								<div className="fs-6 fw-semibold">Donation</div>
-							</div>
-						</Row>
-						<Row>
-							<div
-								key={"Popular-7"}
-								className={`mx-3 ${
-									selectedCategory === "All" ? "selected" : ""
-								}`}
-							>
-								<MdAllInbox style={{ fontSize: "44px", color: "#630f76" }} />
-								<div className="fs-6 fw-semibold">All</div>
-							</div>
-						</Row>
-					</div>
-				</Col>
-			</Row>
-		</div>
+		</section>
 	);
 }
 

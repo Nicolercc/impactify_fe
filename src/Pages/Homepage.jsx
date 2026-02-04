@@ -196,7 +196,9 @@ function Homepage({ backendEvents }) {
 					className=" d-flex justify-content-center"
 					style={{ backgroundColor: "white" }}
 				>
-					<DonationsLayout backendEvents={backendEvents} />
+					<div className="py-10">
+						<DonationsLayout backendEvents={backendEvents} />
+					</div>
 				</ParallaxLayer>
 
 				<ParallaxLayer offset={footer.offset} factor={footer.factor}>

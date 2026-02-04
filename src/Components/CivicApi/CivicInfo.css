@@ -1,7 +1,307 @@
-.search-bar {
-	width: 80vw;
+.civic-layout {
+	background: radial-gradient(circle at top, #f7f5ff, #f0ebff, #ffffff);
 }
-.main-content {
-	/* min-height: calc(100vh - 60px); */
-	/* padding-bottom: 60px; */
+
+.civic-container {
+	max-width: 1140px;
+	margin-inline: auto;
+}
+
+.civic-hero {
+	text-align: center;
+	margin-bottom: 1.75rem;
+	animation: civicFadeUp 500ms ease-out both;
+}
+
+.civic-hero-title {
+	font-size: clamp(1.5rem, 2.7vw, 2rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: #1f1230;
+	margin-bottom: 0.4rem;
+}
+
+.civic-hero-subtitle {
+	font-size: 0.95rem;
+	color: #5a5563;
+	max-width: 36rem;
+	margin: 0 auto;
+}
+
+.civic-label {
+	font-weight: 600;
+	font-size: 0.9rem;
+	color: #332645;
+}
+
+.civic-input {
+	border-radius: 999px;
+	padding-inline: 1.1rem;
+	border: 1px solid rgba(51, 38, 69, 0.18);
+	box-shadow: 0 4px 10px rgba(50, 36, 80, 0.06);
+}
+
+.civic-input:focus {
+	border-color: #630f76;
+	box-shadow: 0 0 0 3px rgba(99, 15, 118, 0.2);
+}
+
+.civic-suggestions {
+	margin: 0.25rem 0 0;
+	padding: 0.4rem 0;
+	list-style: none;
+	border-radius: 14px;
+	background: #ffffff;
+	box-shadow: 0 14px 32px rgba(25, 18, 46, 0.16);
+	max-height: 240px;
+	overflow-y: auto;
+}
+
+.civic-suggestion-item {
+	padding: 0.45rem 0.9rem;
+	cursor: pointer;
+	font-size: 0.9rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 0.5rem;
+}
+
+.civic-suggestion-item:hover {
+	background: rgba(240, 235, 255, 0.7);
+}
+
+.civic-empty {
+	text-align: center;
+	color: #6e6778;
+	font-size: 0.92rem;
+	margin-top: 0.75rem;
+}
+
+.civic-error {
+	text-align: center;
+	color: #7f1d1d;
+	font-size: 0.9rem;
+	margin-top: 0.75rem;
+}
+
+.civic-links {
+	text-align: center;
+	font-size: 0.9rem;
+	color: #5a5563;
+}
+
+.civic-links a {
+	color: #630f76;
+	font-weight: 600;
+}
+
+.civic-links a:hover {
+	color: #8b1fa3;
+	text-decoration: underline;
+}
+
+.civic-official-card {
+	border-radius: 18px;
+	border: 1px solid rgba(99, 15, 118, 0.12);
+	box-shadow:
+		0 10px 24px rgba(34, 20, 58, 0.12),
+		0 2px 6px rgba(0, 0, 0, 0.05);
+	transition:
+		transform 0.18s ease-out,
+		box-shadow 0.18s ease-out,
+		border-color 0.18s ease-out;
+}
+
+.civic-official-card:hover {
+	transform: translateY(-3px);
+	box-shadow:
+		0 16px 32px rgba(34, 20, 58, 0.18),
+		0 3px 10px rgba(0, 0, 0, 0.06);
+	border-color: rgba(139, 31, 163, 0.55);
+}
+
+.civic-official-name {
+	font-size: 1rem;
+	font-weight: 600;
+	color: #23152f;
+}
+
+.civic-official-party {
+	font-size: 0.85rem;
+	color: #7c7388 !important;
+}
+
+.civic-official-line {
+	font-size: 0.85rem;
+	color: #4f475c;
+}
+
+.civic-official-link {
+	font-size: 0.85rem;
+	color: #630f76;
+	font-weight: 600;
+}
+
+.civic-official-link:hover {
+	color: #8b1fa3;
+	text-decoration: underline;
+}
+
+.voter-tools-wrapper {
+	max-width: 960px;
+	margin: 2.5rem auto 3rem;
+	padding: 1.75rem 1.5rem 1.5rem;
+	border-radius: 22px;
+	background: linear-gradient(
+		135deg,
+		rgba(248, 245, 255, 0.98),
+		rgba(241, 234, 255, 0.98)
+	);
+	box-shadow:
+		0 16px 34px rgba(32, 21, 60, 0.18),
+		0 2px 6px rgba(0, 0, 0, 0.06);
+	position: relative;
+	overflow: hidden;
+}
+
+.voter-tools-wrapper::before {
+	content: "";
+	position: absolute;
+	width: 220px;
+	height: 220px;
+	border-radius: 50%;
+	background: radial-gradient(circle, rgba(201, 69, 165, 0.4), transparent 60%);
+	top: -40px;
+	right: -60px;
+	opacity: 0.4;
+	filter: blur(1px);
+	animation: civicFloat 10s ease-in-out infinite;
+	pointer-events: none;
+}
+
+.voter-tools-header h2 {
+	font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+	font-weight: 700;
+	color: #211431;
+	margin-bottom: 0.3rem;
+}
+
+.voter-tools-header p {
+	margin: 0;
+	font-size: 0.92rem;
+	color: #5c556b;
+	max-width: 40rem;
+}
+
+.voter-tools-header {
+	text-align: center;
+	margin-inline: auto;
+}
+
+.voter-tools-actions {
+	margin-top: 0.75rem;
+}
+
+.voter-tools-cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.55rem 1.4rem;
+	border-radius: 999px;
+	border: none;
+	background-image: linear-gradient(120deg, #630f76, #c945a5);
+	color: #ffffff;
+	font-size: 0.85rem;
+	font-weight: 600;
+	text-decoration: none;
+	box-shadow:
+		0 9px 20px rgba(99, 15, 118, 0.3),
+		0 2px 4px rgba(0, 0, 0, 0.08);
+	transition:
+		transform 0.16s ease,
+		box-shadow 0.16s ease,
+		filter 0.16s ease;
+}
+
+.voter-tools-cta:hover {
+	transform: translateY(-1px);
+	box-shadow:
+		0 12px 24px rgba(99, 15, 118, 0.34),
+		0 3px 7px rgba(0, 0, 0, 0.08);
+	filter: brightness(1.03);
+	color: #ffffff;
+}
+
+.voter-tools-cta:active {
+	transform: translateY(0);
+	box-shadow:
+		0 4px 10px rgba(99, 15, 118, 0.28),
+		0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.voter-tools-loading {
+	margin-top: 1rem;
+	font-size: 0.9rem;
+	color: #6c657a;
+}
+
+.voter-tools-error {
+	margin-top: 1rem;
+	padding: 0.75rem 1rem;
+	border-radius: 12px;
+	background: rgba(255, 231, 231, 0.9);
+	color: #7f1d1d;
+	font-size: 0.9rem;
+}
+
+.vit-size-container {
+	margin-top: 1.25rem;
+}
+
+@keyframes civicFloat {
+	0% {
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+	50% {
+		transform: translate3d(-10px, 8px, 0) scale(1.04);
+	}
+	100% {
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+}
+
+@keyframes civicFadeUp {
+	from {
+		opacity: 0;
+		transform: translate3d(0, 10px, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@media (max-width: 576px) {
+	.civic-container {
+		padding-inline: 1rem !important;
+	}
+
+	.voter-tools-wrapper {
+		margin-inline: 1rem;
+		padding-inline: 1.25rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.civic-input,
+	.civic-suggestion-item {
+		scroll-behavior: auto;
+	}
+	.civic-hero,
+	.voter-tools-wrapper::before,
+	.civic-official-card {
+		animation: none !important;
+		transition: none !important;
+	}
 }

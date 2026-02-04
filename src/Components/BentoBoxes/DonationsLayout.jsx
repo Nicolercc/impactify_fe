@@ -10,7 +10,9 @@ import nowar from "../../assets/nowar.svg";
 
 function DonationsLayout({ backendEvents }) {
 	const navigate = useNavigate();
-	const ukraineEvent = backendEvents[7];
+	// Ensure backendEvents is always an array
+	const safeBackendEvents = Array.isArray(backendEvents) ? backendEvents : [];
+	const ukraineEvent = safeBackendEvents[7];
 
 	const handleDonationNavigate = () => {
 		navigate("discover/donate");
@@ -26,14 +28,7 @@ function DonationsLayout({ backendEvents }) {
 	return (
 		<Container
 			fluid
-			style={{
-				display: "flex",
-				flexDirection: "column",
-				rowGap: "10px",
-				marginTop: "0px",
-				width: "80%",
-			}}
-			className=""
+			className="donations-layout-container"
 		>
 			<Row xs={1} md={12} lg={8} className="">
 				<Col style={{ paddingLeft: "0px", paddingRight: "0px" }}>
@@ -113,11 +108,11 @@ function DonationsLayout({ backendEvents }) {
 								className="fw-bold title fs-4  d-flex justify-content-center  mx-2 "
 								style={{ paddingTop: "5px" }}
 							>
-								Crisis in Ukraine
+								Charity Work
 							</div>
-							<div className="mx-2 d-flex justify-content-center ">
+							{/* <div className="mx-2 d-flex justify-content-center ">
 								Learn more about the crisis in Ukraine
-							</div>
+							</div> */}
 
 							<span
 								className="donate-btn mt-2"
@@ -148,9 +143,9 @@ function DonationsLayout({ backendEvents }) {
 							<div className="d-flex justify-content-center ">
 								<div className="fs-4 fw-bold title pt-2">Fundraising FAQs</div>
 							</div>
-							<div className=" d-flex justify-content-center ">
+							{/* <div className=" d-flex justify-content-center ">
 								Why should we care and participate?
-							</div>
+							</div> */}
 
 							<span
 								className=" donate-btn mt-1"
@@ -180,20 +175,24 @@ function DonationsLayout({ backendEvents }) {
 						>
 							<img src={Play} alt="Climate Image" className="climate-image" />
 						</div>
-						<div className="bottom-half ">
-							<div className="d-flex justify-content-center m-1">
-								<div className=" fw-bold  fs-4 ">How Impactify works</div>
-							</div>
-							<div className="d-flex justify-content-center"></div>
-							<div className="mx-2 ">
+						<div className="bottom-half">
+							<div className="title fs-4">About Impactify</div>
+							{/* <div className="text-center">
 								Watch a video to learn more about our purpose
-							</div>
-
+							</div> */}
 							<span
-								className=" donate-btn d-flex justify-content-center mt-2"
+								className="donate-btn"
 								onClick={handleInfoNavigate}
+								role="button"
+								tabIndex={0}
+								onKeyDown={(e) => {
+									if (e.key === 'Enter' || e.key === ' ') {
+										e.preventDefault();
+										handleInfoNavigate();
+									}
+								}}
 							>
-								Play <FaArrowRight className="mx-3" />
+								Play <FaArrowRight style={{ marginLeft: '0.5rem' }} />
 							</span>
 						</div>
 					</div>

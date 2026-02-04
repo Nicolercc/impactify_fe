@@ -1,30 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import "./Progressbar.css";
 
-const Progressbar = ({ donateAmount }) => {
-	const [donationGoal, setDonationGoal] = useState(175.00);
-	const [verifiedFunds, setVerifiedFunds] = useState(0);
-	const [currentAmount, setCurrentAmount] = useState(50);
-	//WEBHOOK INTERGRATION FETCH HERE FOR VerifiedFunds/CURRENT AMOUNT FROM STRIPE
+const Progressbar = ({ donateAmount = 0 }) => {
+	const [donationGoal, setDonationGoal] = useState(0);
+	const [currentAmount, setCurrentAmount] = useState(0);
 
 	useEffect(() => {
-		setDonationGoal(donateAmount + 10.00);
+		const safeAmount = Number.isFinite(Number(donateAmount))
+			? Number(donateAmount)
+			: 0;
+
+		// Simple placeholder logic:
+		// goal is slightly above amount, current is the amount itself.
+		setDonationGoal(safeAmount > 0 ? safeAmount * 1.2 : 100);
+		setCurrentAmount(safeAmount);
 	}, [donateAmount]);
 
-	const percentage = Math.min((currentAmount / donationGoal) * 100, 100);
+	const percentage =
+		donationGoal > 0
+			? Math.min((currentAmount / donationGoal) * 100, 100)
+			: 0;
 
 	return (
-		<div className="progress-container mb-4 ">
-			<span class=" mx-4 ">Current:{currentAmount} </span>
-			<span class="">Goal: {donationGoal}</span>
+		<div className="progress-container mb-3">
+			<div className="progress-labels" aria-hidden="true">
+				<span className="current">
+					Raised: ${currentAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+				</span>
+				<span className="goal">
+					Goal: ${donationGoal.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+				</span>
+			</div>
+
 			<ProgressBar
 				animated
 				now={percentage}
 				label={`${percentage.toFixed(0)}%`}
 				variant="success"
-				style={{ width: "30vh", height: "110%", backgroundColor: "#BC9EC1" }}
-				className="mt-2"
+				className="mt-1 donations-progress-bar"
+				role="progressbar"
+				aria-valuenow={Math.round(percentage)}
+				aria-valuemin={0}
+				aria-valuemax={100}
 			/>
 		</div>
 	);

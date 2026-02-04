@@ -7,17 +7,22 @@ function CarouselComponent({ backendEvents }) {
 	const navigate = useNavigate();
 	const [index, setIndex] = useState(0);
 
+	// Ensure backendEvents is always an array
+	const safeBackendEvents = Array.isArray(backendEvents) ? backendEvents : [];
+
 	const handleSelect = (selectedIndex, e) => {
 		setIndex(selectedIndex);
 	};
 
 	const handleContentClick = (eventObj) => {
 		console.log("you clicked me", eventObj);
-		let selected = backendEvents.find(
-			(bkdEnvts) => bkdEnvts.event_id === eventObj.event_id
+		const eventId = eventObj.event_id || eventObj.id || eventObj._id;
+		let selected = safeBackendEvents.find(
+			(bkdEnvts) =>
+				(bkdEnvts.event_id || bkdEnvts.id || bkdEnvts._id) === eventId
 		);
-		navigate(`/discover/eventdetails/${eventObj.event_id}`, {
-			state: { event: selected },
+		navigate(`/discover/eventdetails/${eventId}`, {
+			state: { event: selected || eventObj },
 		});
 	};
 
@@ -27,6 +32,7 @@ function CarouselComponent({ backendEvents }) {
 				style={{ padding: "10px" }}
 				className="d-flex justify-content-center"
 			>
+				{safeBackendEvents.length > 0 && (
 				<Carousel
 					activeIndex={index}
 					onSelect={handleSelect}
@@ -34,7 +40,23 @@ function CarouselComponent({ backendEvents }) {
 					indicators={true}
 					className="custom-carousel"
 				>
-					{backendEvents.map((event, index) => (
+						{safeBackendEvents.map((event, index) => {
+							const imageSrc =
+								event.event_photo ||
+								event.image ||
+								event.image_url ||
+								event.photo ||
+								event.featureImageUrl ||
+								event.featured_image_url ||
+								event.logo_url ||
+								"https://via.placeholder.com/800x400?text=No+Image";
+							const title =
+								event.event_title ||
+								event.title ||
+								event.name ||
+								"Untitled Event";
+
+							return (
 						<Carousel.Item
 							key={index}
 							onClick={() => handleContentClick(event)}
@@ -42,8 +64,8 @@ function CarouselComponent({ backendEvents }) {
 							<img
 								className="d-block  image-sizing"
 								style={{ width: "100%", height: "100%" }}
-								src={event.event_photo}
-								alt={event.event_title}
+										src={imageSrc}
+										alt={title}
 							/>
 							<div
 								style={{
@@ -56,11 +78,13 @@ function CarouselComponent({ backendEvents }) {
 								}}
 							></div>
 							<Carousel.Caption>
-								<h3>{event.event_title}</h3>
+										<h3>{title}</h3>
 							</Carousel.Caption>
 						</Carousel.Item>
-					))}
+							);
+						})}
 				</Carousel>
+				)}
 			</div>
 		</div>
 	);

@@ -44,7 +44,7 @@ const DetailsTest = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const { user, eventId } = useAuthDataProvider();
-	const backend = import.meta.env.VITE_BACKEND_URL;
+	const backend = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
 	const [loading, setLoading] = useState(true);
 	const [travelMode, setTravelMode] = useState("DRIVING");
 	const [showDonationButton, setShowDonationButton] = useState(false);
@@ -53,15 +53,15 @@ const DetailsTest = () => {
 	const [checked, setChecked] = useState(false);
 	const [buyButtonId, setBuyButtonId] = useState(null);
 	const [registeredGuest, setRegisteredGuest] = useState({
-		firstname: "Nicole",
-		lastname: "Rodriguez",
-		email: "example@email.com",
-		mobile: "612-867-5309",
+		firstname: "",
+		lastname: "",
+		email: "",
+		mobile: "",
 	});
 
 	const handleTextChange = (event) => {
 		const { name, value } = event.target;
-		setRegisteredGuest({ ...registeredGuest, [name]: value });
+		setRegisteredGuest((prev) => ({ ...prev, [name]: value }));
 	};
 
 	const handleEventRegister = () => {
@@ -100,14 +100,26 @@ const DetailsTest = () => {
 	} = theEvent;
 
 	useEffect(() => {
+		if (!id) {
+			setLoading(false);
+			return;
+		}
 		axios
 			.get(`${backend}/events/${id}`)
 			.then((res) => {
-				setTheEvent(res.data);
+				// Handle various API response structures
+				const eventData = res.data?.data || res.data?.event || res.data;
+				if (eventData) {
+					setTheEvent(eventData);
+				}
 			})
-			.catch((error) => console.error(error))
-			.finally(setLoading(false));
-	}, []);
+			.catch((error) => {
+				console.error("Error fetching event:", error);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
+	}, [id, backend]);
 
 	// useEffect(() => {
 
@@ -154,11 +166,12 @@ const DetailsTest = () => {
 		}
 	}, [stripe_id]);
 
-	const hasRequiredKeys = ["event_location", "lat", "lng"].every((key) =>
+	const hasRequiredKeys = theEvent && ["event_location", "lat", "lng"].every((key) =>
 		Object.keys(theEvent).includes(key)
 	);
 
-	const displayMap = locationName && lat && lng;
+	// Map disabled for now - can be re-enabled when Google Maps API is configured
+	const displayMap = false; // locationName && lat && lng;
 
 	let imageSrc =
 		image || theEvent.logo_url || theEvent.event_photo || defaultImage;
@@ -195,17 +208,22 @@ const DetailsTest = () => {
 										<div className="mx-2 my-4">
 											<div className="m-2">
 												<CiCalendar className="" />
-												<span className="fw-bold fs-5 mx-2">Time</span>
-												<span className="fw-bold fs-6 d-block my-2">
-													{theEvent?.event_date.slice(0, 10)}
+												<span className="fw-bold fs-5 mx-2">Date & Time</span>
+												<span className="fw-normal fs-6 d-block my-2">
+													{theEvent?.event_date
+														? typeof theEvent.event_date === "string"
+															? theEvent.event_date.slice(0, 10)
+															: new Date(theEvent.event_date * 1000).toLocaleDateString()
+														: "Date not available"}
 												</span>
-												<span className="fw-bold fs-6 d-block">
-													{theEvent?.event_time.slice(0, 5)}pm
+												<span className="fw-normal fs-6 d-block">
+													{theEvent?.event_time
+														? typeof theEvent.event_time === "string"
+															? theEvent.event_time.slice(0, 5)
+															: theEvent.event_time
+														: "Time not available"}
 												</span>
 											</div>
-											{/* <div className="fs-5 my-1 text-decoration-underline fw-bold text-secondary">
-												Map
-											</div> */}
 										</div>
 									</Col>
 								</Row>
@@ -226,30 +244,49 @@ const DetailsTest = () => {
 									</div>
 								</Row>
 								<hr className="my-4" />
-								<Row className="map-row mb-5">
-									<div className="map-controls  mb-3">
-										<button
-											className="rounded-button btn mr-3"
-											onClick={() => setTravelMode("DRIVING")}
-										>
-											Driving
-										</button>
-										<button
-											className="rounded-button btn mx-3"
-											onClick={() => setTravelMode("WALKING")}
-										>
-											Walking
-										</button>
-									</div>
-									<div className="">
-										<GoogleMap
-											location={locationName}
-											lat={lat}
-											lng={lng}
-											travelMode={travelMode}
-										/>
-									</div>
-								</Row>
+								{/* Map disabled for now - re-enable when Google Maps API is configured */}
+								{displayMap && locationName && (
+									<Row className="map-row mb-5">
+										<div className="map-controls mb-3">
+											<button
+												className="rounded-button btn mr-3"
+												onClick={() => setTravelMode("DRIVING")}
+											>
+												Driving
+											</button>
+											<button
+												className="rounded-button btn mx-3"
+												onClick={() => setTravelMode("WALKING")}
+											>
+												Walking
+											</button>
+										</div>
+										<div className="">
+											<GoogleMap
+												location={locationName}
+												lat={lat}
+												lng={lng}
+												travelMode={travelMode}
+											/>
+										</div>
+									</Row>
+								)}
+								{!displayMap && locationName && (
+									<Row className="mb-5">
+										<Col>
+											<div className="p-3 bg-light rounded">
+												<p className="mb-2">
+													<strong>Location:</strong> {locationName}
+												</p>
+												{lat && lng && (
+													<p className="mb-0 text-muted small">
+														Coordinates: {typeof lat === "number" ? lat.toFixed(4) : lat}, {typeof lng === "number" ? lng.toFixed(4) : lng}
+													</p>
+												)}
+											</div>
+										</Col>
+									</Row>
+								)}
 							</Col>
 							<Col sm={11} md={4} className="">
 								<Row
@@ -279,7 +316,7 @@ const DetailsTest = () => {
 															type="text"
 															placeholder="first name"
 															value={registeredGuest.firstname}
-															name="firstName"
+															name="firstname"
 															onChange={handleTextChange}
 														/>
 													</Form.Group>
@@ -290,7 +327,7 @@ const DetailsTest = () => {
 															type="text"
 															placeholder="last name"
 															value={registeredGuest.lastname}
-															name="lastName"
+															name="lastname"
 															onChange={handleTextChange}
 														/>
 													</Form.Group>
@@ -315,7 +352,7 @@ const DetailsTest = () => {
 													placeholder="mobile number"
 													value={registeredGuest.mobile}
 													name="mobile"
-													// onClick={() => handleTextChange(event)}
+													onChange={handleTextChange}
 												/>
 											</Form.Group>
 										</Form>
