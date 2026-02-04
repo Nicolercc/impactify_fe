@@ -165,6 +165,70 @@ function MainNavigationBar() {
 					</Link>
 				</Nav>
 			</Navbar.Collapse>
+		</>
+	);
+
+	const mobileNavbar = (
+		<>
+			<Navbar.Toggle
+				aria-controls="basic-navbar-nav"
+				className="outline-none"
+			/>
+			<Navbar.Brand
+				className="mx-auto display-2"
+				style={{ paddingTop: "0", paddingBottom: "0" }}
+				href="/"
+			>
+				<Logo />
+			</Navbar.Brand>
+			<Link to="/search">
+				<div className="mx-3">
+					<FaSearch className="" style={{ marginRight: "2px" }} />
+					Search
+				</div>
+			</Link>
+			<Navbar.Collapse id="basic-navbar-nav">
+				<Row className="w-100">
+					<Col md={6}>
+						<Nav className="ml-auto">
+							<Nav.Link href="/howitworks" className=" mt-3">
+								How It Works
+							</Nav.Link>
+							<Nav.Link href="/discover/users/login" className="">
+								Sign In
+							</Nav.Link>
+						</Nav>
+					</Col>
+					<Col md={6}>
+						<Nav>
+							<Nav.Link href="/discover/news">News</Nav.Link>
+							<Nav.Link href="/discover/events">Events</Nav.Link>
+
+							<Nav.Link href="#donations">Donations</Nav.Link>
+							<Nav.Link href="/discover/voting">Voting Toolkit</Nav.Link>
+						</Nav>
+					</Col>
+				</Row>
+				<Link to="discover/create-event">
+					<Button
+						variant=""
+						className="w-100 m-3 btn rounded-pill start-event-btn"
+					>
+						Start Event
+					</Button>
+				</Link>
+			</Navbar.Collapse>
+		</>
+	);
+
+	return (
+		<Navbar
+			bg="light"
+			expand="lg"
+			sticky="top"
+			className="navbar-shadow scrolling"
+		>
+			{isResponsive ? mobileNavbar : regularNavbar}
 		</Navbar>
 	);
 }

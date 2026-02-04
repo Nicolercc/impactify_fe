@@ -3,17 +3,6 @@
 const ParallaxConfig = {
 	// xs not done
 	xs: {
-		firstPage: {
-			offset: 0.2,
-			speed: 0.8,
-		},
-		secondPage: {
-			offset: 0.5,
-			speed: 0.5,
-		},
-	},
-	//  ------------------- small ------------------//
-	s: {
 		parallax: {
 			pages: 4,
 		},
@@ -41,6 +30,36 @@ const ParallaxConfig = {
 			offset: 3.658,
 			factor: 1,
 		},
+	},
+	//  ------------------- small ------------------//
+	s: {
+		parallax: {
+			pages: 4,
+		},
+		firstPage: {
+			offset: 0.7,
+			speed: 0,
+			factor: 1.4,
+		},
+		secondPage: {
+			offset: 1.7,
+			speed: 0,
+			factor: 1,
+		},
+		thirdPage: {
+			offset: 2.3,
+			speed: 0,
+			factor: 1,
+		},
+		fourthPage: {
+			offset: 2.9,
+			speed: 0,
+			factor: 1,
+		},
+		footer: {
+			offset: 3.9,
+			factor: 1,
+		},
 		//  ------------------- medium ------------------//
 	},
 	//  ------------------- medium ------------------//
@@ -61,15 +80,15 @@ const ParallaxConfig = {
 		thirdPage: {
 			offset: 2.34,
 			speed: 0,
-			factor: 0.5,
+			factor: 0.8,
 		},
 		fourthPage: {
-			offset: 2.75,
+			offset: 2.8,
 			speed: 0,
-			factor: 1.4,
+			factor: 1.2,
 		},
 		footer: {
-			offset: 3.7,
+			offset: 3.8,
 			factor: 1,
 		},
 	},
@@ -89,22 +108,25 @@ const ParallaxConfig = {
 			factor: 1,
 		},
 		thirdPage: {
-			offset: 2.45,
+			offset: 2.2,
 			speed: 0,
-			factor: 0.5,
+			factor: 0.7,
 		},
 		fourthPage: {
-			offset: 2.87,
+			offset: 3.4,
 			speed: 0,
-			factor: 1.4,
+			factor: 1,
 		},
 		footer: {
-			offset: 3.98,
+			offset: 3.97,
 			factor: 1,
 		},
 	},
 	//  -----------------extra large---------------//
 	xl: {
+		parallax: {
+			pages: 4.3,
+		},
 		firstPage: {
 			offset: 0.7,
 			speed: 0,

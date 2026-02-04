@@ -1,4 +1,5 @@
 import { useLayoutEffect, useState } from "react";
+import ParallaxConfig from "./ParallaxConfig";
 
 /**
  * this hook sets up event listeners for window resizing and triggers
@@ -13,49 +14,39 @@ export const Adaptive = Object.freeze({
 	xl: "xl",
 });
 
-export function useAdaptiveTriggers({
-	onExtraSmallEnter,
-	onSmallEnter,
-	onMediumEnter,
-	onLargeEnter,
-	onExtraLargeEnter,
-}) {
-	const [width, setWidth] = useState(Adaptive.xl);
+export function useAdaptiveTriggers() {
+	const [parallaxConfig, setParallaxConfig] = useState(ParallaxConfig.xl);
 
 	useLayoutEffect(() => {
 		//handle window resizing by triggering fucntions based on the window size
 		const handleResize = () => {
 			if (window?.innerWidth < 768) {
-				onExtraSmallEnter?.();
-				return setWidth(Adaptive.xs);
+				console.log("xs screen");
+				return setParallaxConfig(ParallaxConfig.xs);
 			}
 			if (window?.innerWidth < 1024) {
-				onSmallEnter?.();
-				return setWidth(Adaptive.s);
+				console.log("s screen");
+				return setParallaxConfig(ParallaxConfig.s);
 			}
 			if (window?.innerWidth < 1280) {
-				onMediumEnter?.();
-				return setWidth(Adaptive.m);
+				console.log("m screen");
+				return setParallaxConfig(ParallaxConfig.m);
 			}
 			if (window?.innerWidth < 1440) {
-				onLargeEnter?.();
-				return setWidth(Adaptive.l);
+				console.log("l screen");
+				return setParallaxConfig(ParallaxConfig.l);
 			}
-			onExtraLargeEnter?.();
-			return setWidth(Adaptive.xl);
+
+			return setParallaxConfig(ParallaxConfig.xl);
 		};
 
 		window.addEventListener("resize", handleResize);
 		handleResize();
 
 		return () => window.removeEventListener("resize", handleResize);
-	}, [
-		onSmallEnter,
-		onMediumEnter,
-		onLargeEnter,
-		onExtraLargeEnter,
-		onExtraSmallEnter,
-	]);
+	}, []);
 
-	return width;
+	return {
+		parallaxConfig,
+	};
 }
