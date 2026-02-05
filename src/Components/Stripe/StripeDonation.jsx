@@ -6,10 +6,12 @@ import {
   ConnectComponentsProvider,
 } from "@stripe/react-connect-js";
 
+import BACKEND_URL from "../../config/backend";
+
 const StripeDonation = () => {
 
   const stripePublishKey = import.meta.env.VITE_STRIPE_PUBLISHABLE  
-  const backend = import.meta.env.VITE_BACKEND_URL
+  const backend = BACKEND_URL
 
   const [fetched_acc, setFetched_Acc] = useState("")
   const [error, setError] = useState("");

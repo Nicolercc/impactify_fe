@@ -6,13 +6,14 @@ import SearchBar from "../Components/SearchBar";
 import BentoBox from "../Components/Card/BentoBox";
 
 import './DiscoverMonitor.css'
+import BACKEND_URL from "../config/backend";
 
 function DiscoverMonitor() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [newsData, setNewsData] = useState([]);
   const [eventsData, setEventsData] = useState([]); 
-  const backend = import.meta.env.VITE_BACKEND_URL;
+  const backend = BACKEND_URL;
 
   const handleSelectCategory = (category) => {
     setSelectedCategory(category);

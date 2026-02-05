@@ -31,9 +31,10 @@ import DetailsTest from "./Pages/Test/DetailsTest";
 import VoterInfoW from "./Components/CivicApi/VoterInfoW";
 import LoadingState from "./Components/LoadingState/LoadingState";
 import "./App.css";
+import BACKEND_URL from "./config/backend";
 
 function App() {
-	const backend = "http://localhost:4000";
+	const backend = BACKEND_URL;
 	const [backendEvents, setBackendEvents] = useState([]);
 	const [backendNews, setBackendNews] = useState([]);
 	const [loading, setLoading] = useState(true);

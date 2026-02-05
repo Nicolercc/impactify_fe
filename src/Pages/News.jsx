@@ -15,6 +15,7 @@ import {
 } from "react-icons/md";
 import "./News.css";
 import LoadingState from "../Components/LoadingState/LoadingState";
+import BACKEND_URL from "../config/backend";
 
 const CATEGORY_CONFIG = [
 	{
@@ -81,7 +82,7 @@ const News = () => {
 	const [usingFallback, setUsingFallback] = useState(false);
 	const [selectedCategory, setSelectedCategory] = useState("all");
 	const navigate = useNavigate();
-	const backend = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+	const backend = BACKEND_URL;
 	const newsAPIKey =
 		import.meta.env.VITE_X_NEWSAPI_KEY || import.meta.env.VITE_APP_NEWSAPI_KEY;
 

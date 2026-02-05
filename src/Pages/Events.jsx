@@ -7,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 import "./Events.css";
 import MainContent from "../Components/MainContent";
 import CategoriesSection from "../Components/CategoriesSection/CategoriesSection";
+import BACKEND_URL from "../config/backend";
+
+const backend = BACKEND_URL;
 
 const Events = ({ backendEvents }) => {
 	const [clickedEvent, setClickedEvent] = useState(null);
@@ -18,8 +21,6 @@ const Events = ({ backendEvents }) => {
 	const [selectedCategory, setSelectedCategory] = useState("all");
 	const [allEvents, setAllEvents] = useState([]);
 	const navigate = useNavigate();
-
-	const backend = "http://localhost:4000";
 
 	useEffect(() => {
 		const fetchEvents = async () => {

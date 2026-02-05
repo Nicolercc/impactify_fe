@@ -5,13 +5,14 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Row, Col, Image } from "react-bootstrap";
 import loginbg from "../assets/loginshort.png";
 import signupImg from "../assets/welcome.png";
+import BACKEND_URL from "../config/backend";
 import "./LoginPage.css";
 
 const LoginPage = () => {
 	const navigate = useNavigate();
 	const location = useLocation(null);
 
-	const backend = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+	const backend = BACKEND_URL;
 	const { API, setUser, setToken } = useContext(AuthData);
 	const [loginError, setLoginError] = useState("");
 

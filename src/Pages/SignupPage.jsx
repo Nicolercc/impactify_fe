@@ -4,13 +4,14 @@ import { AuthData } from "../Provider/AuthProv";
 import { Container, Row, Col, Card, Image } from "react-bootstrap";
 import SignUpForm from "../Components/userManagement/SignUpForm";
 import signupImg from "../assets/signup-user.png";
+import BACKEND_URL from "../config/backend";
 
 const SignUpPage = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
 	const { API, setUser, setToken } = useContext(AuthData);
-	const backend = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+	const backend = BACKEND_URL;
 
 	const handleSignUp = async (userData) => {
 		try {

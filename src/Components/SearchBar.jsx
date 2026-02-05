@@ -3,9 +3,10 @@ import { InputGroup, FormControl, Button, Form, Col } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SearchResultPage from "../Pages/SearchResultPage";
+import BACKEND_URL from "../config/backend";
 //FINAL
 function SearchBar({ onSearch }) {
-	const backend = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+	const backend = BACKEND_URL;
 	const [searchInput, setSearchInput] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);

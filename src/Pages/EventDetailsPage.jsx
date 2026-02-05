@@ -14,7 +14,7 @@ function EventDetailsPage() {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const { event: eventFromState } = location.state || {};
-	const backend = "http://localhost:4000";
+	const backend = BACKEND_URL;
 	const [event, setEvent] = useState(eventFromState || {});
 	const [loading, setLoading] = useState(true);
 	const [showThankYouModal, setShowThankYouModal] = useState(false);
