@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { useNavigate } from "react-router-dom";
-import Card from "../Card/Card";
 import "./Carousel.css";
 
 function CarouselComponent({ backendEvents }) {
@@ -29,9 +28,6 @@ function CarouselComponent({ backendEvents }) {
 
 	return (
 		<div className="" style={{ padding: "30px" }}>
-			<div className="fw-bold fs-4 my-3 d-flex justify-content-center">
-				Most popular events
-			</div>
 			<div
 				style={{ padding: "10px" }}
 				className="d-flex justify-content-center"
