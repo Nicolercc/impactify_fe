@@ -14,9 +14,10 @@ import { MdEmail } from "react-icons/md";
 import { Col, Row } from "react-bootstrap";
 import loader from "../LoadingState/LoadingState";
 import axios from "axios";
+import BACKEND_URL from "../../config/backend";
 import "./NewsDetails.css";
 const NewsDetails = () => {
-	const backend = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+	const backend = BACKEND_URL;
 	const [relatedEvents, setReleatedEvents] = useState([]);
 	const [selectedEvent, setSeletedEvent] = useState({});
 	const [loading, setLoading] = useState(true);

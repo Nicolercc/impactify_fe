@@ -2,10 +2,12 @@ import React from 'react'
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
+import BACKEND_URL from "../../config/backend";
+
 const StripePaymentForm = ({ event }) => {
     const stripe = useStripe();
     const elements = useElements();
-    const backend = process.meta.env.VITE_BACKEND_URL
+    const backend = BACKEND_URL;
  
     const handleSubmit = async (e) => {
         e.preventDefault();

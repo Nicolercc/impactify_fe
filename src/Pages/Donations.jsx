@@ -11,6 +11,7 @@ import climateUser from "../assets/climateUser.jpg";
 import guyUser from "../assets/guyUser.jpg";
 import DarynaDon from "../assets/DarynaDon.png";
 import LoadingState from "../Components/LoadingState/LoadingState";
+import BACKEND_URL from "../config/backend";
 import "./Donations.css";
 
 function normalizeDonationsPayload(payload) {
@@ -26,7 +27,7 @@ function normalizeDonationsPayload(payload) {
 }
 
 function Donations() {
-	const backend = "http://localhost:4000";
+	const backend = BACKEND_URL;
 	const [donationsData, setDonationsData] = useState([]);
 	const [status, setStatus] = useState("loading"); // loading | success | empty | error
 	const [errorMessage, setErrorMessage] = useState("");

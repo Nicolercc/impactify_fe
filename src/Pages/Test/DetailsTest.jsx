@@ -23,6 +23,7 @@ import Event4Strip from "../../Components/Stripe/Event4Stripe";
 import { IoMegaphoneSharp } from "react-icons/io5";
 import { useAuthDataProvider } from "../../Provider/AuthProv";
 import loader from "../../Components/LoadingState/LoadingState";
+import BACKEND_URL from "../../config/backend";
 const LazyStripeBuy = lazy(() => import("../../Components/Stripe/StripeBuy"));
 const DetailsTest = () => {
 	const [theEvent, setTheEvent] = useState({
@@ -44,7 +45,8 @@ const DetailsTest = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const { user, eventId } = useAuthDataProvider();
-	const backend = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+
+	const backend = BACKEND_URL;
 	const [loading, setLoading] = useState(true);
 	const [travelMode, setTravelMode] = useState("DRIVING");
 	const [showDonationButton, setShowDonationButton] = useState(false);

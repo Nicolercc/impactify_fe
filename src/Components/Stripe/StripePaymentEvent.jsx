@@ -5,11 +5,13 @@ import { Card as BootstrapCard } from "react-bootstrap";
 import StripePaymentForm from './StripePaymentForm';
 import axios from 'axios';
 
+import BACKEND_URL from "../../config/backend";
+
 const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLISHABLE
 const stripePromise = loadStripe(stripePublicKey)
 
 const StripePaymentEvent = () => {
-    const backend = import.meta.env.VITE_BACKEND_URL
+    const backend = BACKEND_URL
     const [eventData, setEventData] = useState([]);
 
   //getting user events

@@ -38,7 +38,9 @@ import AutoComplete from "../Components/GeoLocation/AutoComplete";
 import Is_donation from "../Components/DonationModal.jsx/IsDonation";
 import "./CreateEventPage.css";
 
-const backend = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+import BACKEND_URL from "../config/backend";
+
+const backend = BACKEND_URL;
 
 const keywordOptions = [
 	{ value: "activism", label: "Activism" },

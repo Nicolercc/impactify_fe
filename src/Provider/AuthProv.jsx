@@ -1,5 +1,6 @@
 import React, { useContext, createContext, useState, useEffect } from "react";
 import axios from "axios";
+import BACKEND_URL from "../config/backend";
 
 export const AuthData = createContext();
 
@@ -15,7 +16,7 @@ function AuthProv({ children }) {
 		return savedUser ? JSON.parse(savedUser) : null;
 	});
 
-	const backend = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+	const backend = BACKEND_URL;
 
 	const API = axios.create({
 		baseURL: backend,

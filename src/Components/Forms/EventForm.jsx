@@ -10,8 +10,9 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import "./EventForm.css";
 import KeywordsIcons from "./KeywordsIcons";
+import BACKEND_URL from "../../config/backend";
 
-const backend = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+const backend = BACKEND_URL;
 
 const EventForm = ({ user }) => {
 	// const { user } = useContext(AuthData);

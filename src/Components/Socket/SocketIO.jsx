@@ -1,13 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import BACKEND_URL from "../../config/backend";
 
 const SocketContext = createContext();
 
 export const useSocket = () => useContext(SocketContext);
 
 export const SocketProvider = ({ children }) => {
-	const backendURL =
-		import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+	const backendURL = BACKEND_URL;
 	const [socket, setSocket] = useState(null);
 	const [lastHeartbeat, setLastHeartbeat] = useState(Date.now());
 
