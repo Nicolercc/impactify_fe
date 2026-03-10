@@ -6,8 +6,9 @@ import { Button, Form, Modal } from "react-bootstrap";
 import StripeBuy from "../Components/Stripe/StripeBuy";
 import defaultImage from "../assets/NoImage.jpg";
 import { GoQuestion } from "react-icons/go";
-import { IoHeart, IoCalendarOutline, IoLocationOutline, IoTimeOutline } from "react-icons/io5";
+import { IoHeart, IoCalendarOutline, IoLocationOutline, IoTimeOutline, IoCheckmarkCircle, IoInformationCircle } from "react-icons/io5";
 import LoadingState from "../Components/LoadingState/LoadingState";
+import BACKEND_URL from "../config/backend";
 
 function EventDetailsPage() {
 	const location = useLocation();
@@ -37,47 +38,89 @@ function EventDetailsPage() {
 				return;
 			}
 
+			setLoading(true);
+
+			// Use event from state if available and complete
 			if (eventFromState && Object.keys(eventFromState).length > 0) {
+				console.log("Using event from state:", eventFromState);
 				setEvent(eventFromState);
+				setLoading(false);
+				// Still fetch from backend to ensure we have the latest data
 			}
 
 			try {
+				console.log(`Fetching event with ID: ${id} from ${backend}/events/${id}`);
 				const response = await axios.get(`${backend}/events/${id}`);
+				
+				console.log("Event Details API Response:", response.data);
+				console.log("Response data type:", typeof response.data);
+				console.log("Response data keys:", Object.keys(response.data || {}));
+
 				let eventData = null;
 				
+				// Handle various response structures
 				if (Array.isArray(response.data)) {
+					// If response is an array, find the matching event
 					eventData = response.data.find(
-						(e) => (e.event_id || e.id || e._id)?.toString() === id.toString()
+						(e) => {
+							const eventId = (e.event_id || e.id || e._id)?.toString();
+							return eventId === id.toString();
+						}
 					);
+					console.log("Found event in array:", eventData);
 				} else if (response.data?.data) {
+					// Structure: {data: {...event}}
 					eventData = response.data.data;
+					console.log("Found event in response.data.data:", eventData);
 				} else if (response.data?.event) {
+					// Structure: {event: {...event}}
 					eventData = response.data.event;
+					console.log("Found event in response.data.event:", eventData);
 				} else if (response.data && typeof response.data === "object") {
+					// Structure: {...event} directly
 					eventData = response.data;
+					console.log("Using response.data directly as event:", eventData);
 				}
 
+				// Verify the event ID matches
 				if (eventData) {
+					const eventId = (eventData.event_id || eventData.id || eventData._id)?.toString();
+					if (eventId && eventId !== id.toString()) {
+						console.warn(`Event ID mismatch: expected ${id}, got ${eventId}`);
+					}
+					console.log("Setting event data:", eventData);
+					console.log("Event fields:", Object.keys(eventData));
 					setEvent(eventData);
+				} else {
+					console.error("No event data found in response");
+					console.error("Response structure:", response.data);
 				}
 			} catch (error) {
 				console.error("Error fetching event:", error);
+				console.error("Error details:", error.response?.data || error.message);
+				console.error("Error status:", error.response?.status);
+				
+				// If we have event from state, keep it even if fetch fails
+				if (!eventFromState || Object.keys(eventFromState).length === 0) {
+					setEvent({});
+				}
 			} finally {
 				setLoading(false);
 			}
 		};
+		
 		fetchEvent();
-	}, [id, backend]);
+	}, [id, backend, eventFromState]);
 
-	// Safely extract event data with fallbacks
-	const event_id = event?.event_id || event?.id || event?._id || id;
-	const title = event?.event_title || event?.title || event?.name || "Event";
-	const date = event?.event_date || event?.date;
-	const time = event?.event_time || event?.time;
-	const event_details = event?.event_details || event?.details || event?.description || "";
-	const locationName = event?.event_location || event?.location || event?.locationName || "";
-	const image = event?.event_photo || event?.photo || event?.image || event?.logo_url || event?.featured_image_url;
-	const stripe_id = event?.stripe_id || event?.stripeId;
+	// Safely extract event data with fallbacks - handle multiple field name variations
+	const event_id = event?.event_id || event?.id || event?._id || event?.eventId || id;
+	const title = event?.event_title || event?.title || event?.name || event?.eventName || "Event";
+	const date = event?.event_date || event?.date || event?.startDate || event?.start_date;
+	const time = event?.event_time || event?.time || event?.startTime || event?.start_time;
+	const event_details = event?.event_details || event?.details || event?.description || event?.desc || event?.eventDescription || "";
+	const locationName = event?.event_location || event?.location || event?.locationName || event?.venue || event?.address || "";
+	const image = event?.event_photo || event?.photo || event?.image || event?.logo_url || event?.featured_image_url || event?.imageUrl || event?.image_url || event?.thumbnail || event?.thumbnail_url;
+	const stripe_id = event?.stripe_id || event?.stripeId || event?.stripe_id || event?.donationId;
 
 	useEffect(() => {
 		if (stripe_id) {
@@ -478,6 +521,36 @@ function EventDetailsPage() {
 												email to confirm your requirements or request more
 												information.
 											</p>
+										</div>
+									</div>
+								</div>
+
+								{/* What to Expect Section */}
+								<div className="event-expectations-section">
+									<h2 className="event-section-title">What to expect</h2>
+									<div className="expectations-grid">
+										<div className="expectation-card">
+											<div className="expectation-icon-wrapper">
+												<IoCheckmarkCircle className="expectation-icon" />
+											</div>
+											<div className="expectation-content">
+												<h3 className="expectation-title">Clear agenda</h3>
+												<p className="expectation-text">
+													You'll receive a detailed schedule and agenda via email after registration to help you prepare.
+												</p>
+											</div>
+										</div>
+
+										<div className="expectation-card">
+											<div className="expectation-icon-wrapper">
+												<IoInformationCircle className="expectation-icon" />
+											</div>
+											<div className="expectation-content">
+												<h3 className="expectation-title">Event updates</h3>
+												<p className="expectation-text">
+													Stay informed with timely updates and reminders sent to your registered email address.
+												</p>
+											</div>
 										</div>
 									</div>
 								</div>

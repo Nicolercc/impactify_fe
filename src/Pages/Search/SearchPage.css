@@ -1,0 +1,381 @@
+/* ============================================
+   SEARCH PAGE - Modern Design Best Practices
+   ============================================ */
+
+.search-page {
+	min-height: calc(100vh - 200px);
+	background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+	padding: 4rem 0 6rem 0;
+	animation: fadeIn 0.6s ease-out;
+	display: flex;
+	flex-direction: column;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.search-page-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 1.5rem;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.search-hero {
+	text-align: center;
+	margin-bottom: 4rem;
+	animation: slideDown 0.8s ease-out;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.search-hero-content {
+	margin-bottom: 2.5rem;
+}
+
+.search-hero-title {
+	font-size: clamp(2rem, 5vw, 3.5rem);
+	font-weight: 700;
+	color: #2c3e50;
+	margin: 0 0 1rem 0;
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+}
+
+.search-hero-subtitle {
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	color: #6c757d;
+	margin: 0;
+	line-height: 1.6;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.search-bar-wrapper {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 2rem 0;
+	animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* ============================================
+   POPULAR SEARCHES SECTION
+   ============================================ */
+
+.popular-searches-section {
+	margin-top: 4rem;
+	animation: fadeInUp 0.6s ease-out 0.5s both;
+}
+
+.popular-searches-title {
+	font-size: clamp(1.5rem, 3vw, 2rem);
+	font-weight: 700;
+	color: #2c3e50;
+	margin: 0 0 2rem 0;
+	text-align: center;
+	position: relative;
+	padding-bottom: 1rem;
+}
+
+.popular-searches-title::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 60px;
+	height: 3px;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	border-radius: 2px;
+}
+
+.popular-searches-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 1.5rem;
+	margin-top: 2rem;
+}
+
+.popular-search-card {
+	background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	border-radius: 16px;
+	padding: 1.5rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	cursor: pointer;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	text-align: left;
+	position: relative;
+	overflow: hidden;
+}
+
+.popular-search-card::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 4px;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 0.3s ease;
+}
+
+.popular-search-card:hover {
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+	transform: translateY(-4px);
+	border-color: rgba(102, 126, 234, 0.2);
+}
+
+.popular-search-card:hover::before {
+	transform: scaleX(1);
+}
+
+.popular-search-icon-wrapper {
+	width: 56px;
+	height: 56px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+	border-radius: 12px;
+	flex-shrink: 0;
+	transition: all 0.3s ease;
+}
+
+.popular-search-card:hover .popular-search-icon-wrapper {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	transform: scale(1.05);
+}
+
+.popular-search-icon {
+	font-size: 1.75rem;
+	color: #667eea;
+	transition: color 0.3s ease;
+}
+
+.popular-search-card:hover .popular-search-icon {
+	color: #ffffff;
+}
+
+.popular-search-content {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	flex: 1;
+}
+
+.popular-search-label {
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: #2c3e50;
+	line-height: 1.4;
+}
+
+.popular-search-category {
+	font-size: 0.875rem;
+	color: #6c757d;
+	line-height: 1.4;
+}
+
+/* ============================================
+   SEARCH TIPS SECTION
+   ============================================ */
+
+.search-tips-section {
+	margin-top: 4rem;
+	padding-top: 3rem;
+	border-top: 1px solid rgba(0, 0, 0, 0.08);
+	animation: fadeInUp 0.6s ease-out 0.7s both;
+}
+
+.search-tips-title {
+	font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+	font-weight: 700;
+	color: #2c3e50;
+	margin: 0 0 2rem 0;
+	text-align: center;
+}
+
+.search-tips-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 1.5rem;
+	margin-top: 2rem;
+}
+
+.search-tip-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem;
+	padding: 1.5rem;
+	background: #ffffff;
+	border-radius: 12px;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	transition: all 0.3s ease;
+}
+
+.search-tip-item:hover {
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+	transform: translateY(-2px);
+}
+
+.search-tip-number {
+	width: 36px;
+	height: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: #ffffff;
+	border-radius: 50%;
+	font-weight: 700;
+	font-size: 1rem;
+	flex-shrink: 0;
+}
+
+.search-tip-text {
+	font-size: 1rem;
+	line-height: 1.6;
+	color: #495057;
+	margin: 0;
+	flex: 1;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+	.search-page {
+		padding: 1.5rem 0 3rem 0;
+	}
+
+	.search-hero {
+		margin-bottom: 3rem;
+	}
+
+	.search-hero-content {
+		margin-bottom: 2rem;
+	}
+
+	.popular-searches-section,
+	.search-tips-section {
+		margin-top: 3rem;
+	}
+
+	.popular-searches-grid,
+	.search-tips-grid {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	.popular-search-card {
+		padding: 1.25rem;
+	}
+
+	.popular-search-icon-wrapper {
+		width: 48px;
+		height: 48px;
+	}
+
+	.popular-search-icon {
+		font-size: 1.5rem;
+	}
+
+	.search-tip-item {
+		padding: 1.25rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.search-page-container {
+		padding: 0 1rem;
+	}
+
+	.search-hero-title {
+		font-size: 1.75rem;
+	}
+
+	.search-hero-subtitle {
+		font-size: 0.9375rem;
+	}
+
+	.popular-search-label {
+		font-size: 1rem;
+	}
+
+	.search-tip-text {
+		font-size: 0.9375rem;
+	}
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+.popular-search-card:focus-visible {
+	outline: 2px solid #667eea;
+	outline-offset: 2px;
+}
+
+.search-tip-item:focus-visible {
+	outline: 2px solid #667eea;
+	outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	.search-page,
+	.search-hero,
+	.search-bar-wrapper,
+	.popular-searches-section,
+	.search-tips-section {
+		animation: none;
+	}
+
+	.popular-search-card,
+	.search-tip-item {
+		transition: none;
+	}
+
+	.popular-search-card:hover {
+		transform: none;
+	}
+}
+
