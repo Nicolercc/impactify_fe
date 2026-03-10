@@ -128,7 +128,7 @@ function Homepage({ backendEvents }) {
 				</ParallaxLayer>
 				{/* page 3 */}
 				<ParallaxLayer
-					offset={2.47}
+					offset={2.3}
 					speed={0}
 					factor={0.5}
 					className=" d-flex justify-content-center"

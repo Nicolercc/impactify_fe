@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Button, NavLink } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import {
 	IoNewspaper,
@@ -133,28 +133,15 @@ function MainNavigationBar({ scrolling = false }) {
 				</Navbar.Brand>
 
 				<Nav className="ml-auto nav-right">
-					<NavDropdown
-						title="About us"
-						id="about-us-dropdown"
-						className="nav-dropdown-custom"
-						show={aboutUsExpanded}
-						onMouseEnter={handleAboutUsMouseEnter}
-						onMouseLeave={handleAboutUsMouseLeave}
-						onFocus={handleAboutUsMouseEnter}
-						onBlur={handleAboutUsMouseLeave}
-					>
-						<NavDropdown.Item
-							href="/howitworks"
-							className="dropdown-item-custom"
-						>
-							<IoCheckmarkCircle className="dropdown-icon" />
-							<span className="dropdown-text">How It Works</span>
-						</NavDropdown.Item>
-						<NavDropdown.Item href="/aboutus" className="dropdown-item-custom">
-							<MdInfo className="dropdown-icon" />
+					
+						
+							
+					
+						<NavLink href="/howitworks" className="">
+						
 							<span className="dropdown-text">About us</span>
-						</NavDropdown.Item>
-					</NavDropdown>
+						
+					</NavLink>
 
 					{/* <Nav.Link href="/discover/users/login" className="nav-link-custom sign-in-link">
 						Sign In

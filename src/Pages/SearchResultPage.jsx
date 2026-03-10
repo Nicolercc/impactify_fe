@@ -35,7 +35,7 @@ function SearchResultPage() {
 
 	return (
 		<div className="" style={{ paddingRight: "5%", paddingLeft: "5%" }}>
-			<div>
+			<div style={{ marginBottom: "1.5rem", marginTop: "1rem" }}>
 				<SearchBar />
 			</div>
 

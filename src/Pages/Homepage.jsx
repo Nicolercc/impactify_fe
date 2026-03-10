@@ -25,16 +25,17 @@ function Homepage({ backendEvents }) {
 	// 	onExtraLargeEnter: () => {},
 	// });
 
+	const { parallaxConfig } = useAdaptiveTriggers() || {};
+
+	// Safely destructure parallax config with defaults
 	const {
-		parallaxConfig: {
-			parallax,
-			firstPage,
-			secondPage,
-			thirdPage,
-			fourthPage,
-			footer,
-		},
-	} = useAdaptiveTriggers() || {};
+		parallax = { pages: 4.3 },
+		firstPage = { offset: 0.7, speed: 0, factor: 1.1 },
+		secondPage = { offset: 1.6, speed: 0, factor: 1 },
+		thirdPage = { offset: 2.526, speed: 0, factor: 0.5 },
+		fourthPage = { offset: 2.88, speed: 0, factor: 1.4 },
+		footer = { offset: 4, factor: 1 },
+	} = parallaxConfig || {};
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -78,19 +79,18 @@ function Homepage({ backendEvents }) {
 	};
 
 	const getCurrentInnerStyle = () => {
-		switch (adaptiveWidth) {
-			case "xs":
-				return innerStyles.xs;
-			case "sm":
-				return innerStyles.sm;
-			case "md":
-				return innerStyles.md;
-			case "lg":
-				return innerStyles.lg;
-			case "xl":
-				return innerStyles.xl;
-			default:
-				return {};
+		// Determine screen size based on window width
+		const width = window.innerWidth;
+		if (width < 576) {
+			return innerStyles.xs;
+		} else if (width < 768) {
+			return innerStyles.sm;
+		} else if (width < 992) {
+			return innerStyles.md;
+		} else if (width < 1200) {
+			return innerStyles.lg;
+		} else {
+			return innerStyles.xl;
 		}
 	};
 
@@ -166,7 +166,7 @@ function Homepage({ backendEvents }) {
 					speed={secondPage.speed}
 					factor={secondPage.factor}
 					className=" d-flex justify-content-center"
-					style={{ background: `white` }}
+					style={{ background: `blue` }}
 				>
 					<div
 						style={{
@@ -184,7 +184,7 @@ function Homepage({ backendEvents }) {
 					speed={thirdPage.speed}
 					factor={thirdPage.factor}
 					className=" d-flex justify-content-center"
-					style={{ backgroundColor: "white" }}
+					style={{ backgroundColor: "blue", marginTop: "-2rem"  }}
 				>
 					<InfoBlock />
 				</ParallaxLayer>

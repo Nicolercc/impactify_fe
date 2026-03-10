@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Button, NavLink } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import {
 	IoNewspaper,
 	IoCalendar,
 	IoHeart,
-	IoCheckmarkCircle,
 } from "react-icons/io5";
-import { MdInfo, MdHowToVote } from "react-icons/md";
+import { MdHowToVote } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Logo from "../Logo";
 import { useAuthDataProvider } from "../../Provider/AuthProv";
@@ -17,10 +16,8 @@ function MainNavigationBar() {
 	const { user, logout } = useAuthDataProvider();
 
 	const [getInvolvedExpanded, setGetInvolvedExpanded] = useState(false);
-	const [aboutUsExpanded, setAboutUsExpanded] = useState(false);
 
 	const getInvolvedTimeoutRef = useRef(null);
-	const aboutUsTimeoutRef = useRef(null);
 
 	// Improved dropdown with delay for better UX
 	const handleGetInvolvedMouseEnter = () => {
@@ -36,27 +33,11 @@ function MainNavigationBar() {
 		}, 200);
 	};
 
-	const handleAboutUsMouseEnter = () => {
-		if (aboutUsTimeoutRef.current) {
-			clearTimeout(aboutUsTimeoutRef.current);
-		}
-		setAboutUsExpanded(true);
-	};
-
-	const handleAboutUsMouseLeave = () => {
-		aboutUsTimeoutRef.current = setTimeout(() => {
-			setAboutUsExpanded(false);
-		}, 200);
-	};
-
 	// Cleanup timeouts
 	useEffect(() => {
 		return () => {
 			if (getInvolvedTimeoutRef.current) {
 				clearTimeout(getInvolvedTimeoutRef.current);
-			}
-			if (aboutUsTimeoutRef.current) {
-				clearTimeout(aboutUsTimeoutRef.current);
 			}
 		};
 	}, []);
@@ -131,28 +112,15 @@ function MainNavigationBar() {
 				</Navbar.Brand>
 
 				<Nav className="ml-auto nav-right">
-					<NavDropdown
-						title="About us"
-						id="about-us-dropdown"
-						className="nav-dropdown-custom"
-						show={aboutUsExpanded}
-						onMouseEnter={handleAboutUsMouseEnter}
-						onMouseLeave={handleAboutUsMouseLeave}
-						onFocus={handleAboutUsMouseEnter}
-						onBlur={handleAboutUsMouseLeave}
-					>
-						<NavDropdown.Item
-							href="/howitworks"
-							className="dropdown-item-custom"
-						>
-							<IoCheckmarkCircle className="dropdown-icon" />
-							<span className="dropdown-text">How It Works</span>
-						</NavDropdown.Item>
-						<NavDropdown.Item href="/aboutus" className="dropdown-item-custom">
-							<MdInfo className="dropdown-icon" />
+					
+						
+							
+					
+						<NavLink href="/howitworks" className="">
+						
 							<span className="dropdown-text">About us</span>
-						</NavDropdown.Item>
-					</NavDropdown>
+						
+					</NavLink>
 
 					{/* <Nav.Link href="/discover/users/login" className="nav-link-custom sign-in-link">
 						Sign In
@@ -165,70 +133,6 @@ function MainNavigationBar() {
 					</Link>
 				</Nav>
 			</Navbar.Collapse>
-		</>
-	);
-
-	const mobileNavbar = (
-		<>
-			<Navbar.Toggle
-				aria-controls="basic-navbar-nav"
-				className="outline-none"
-			/>
-			<Navbar.Brand
-				className="mx-auto display-2"
-				style={{ paddingTop: "0", paddingBottom: "0" }}
-				href="/"
-			>
-				<Logo />
-			</Navbar.Brand>
-			<Link to="/search">
-				<div className="mx-3">
-					<FaSearch className="" style={{ marginRight: "2px" }} />
-					Search
-				</div>
-			</Link>
-			<Navbar.Collapse id="basic-navbar-nav">
-				<Row className="w-100">
-					<Col md={6}>
-						<Nav className="ml-auto">
-							<Nav.Link href="/howitworks" className=" mt-3">
-								How It Works
-							</Nav.Link>
-							<Nav.Link href="/discover/users/login" className="">
-								Sign In
-							</Nav.Link>
-						</Nav>
-					</Col>
-					<Col md={6}>
-						<Nav>
-							<Nav.Link href="/discover/news">News</Nav.Link>
-							<Nav.Link href="/discover/events">Events</Nav.Link>
-
-							<Nav.Link href="#donations">Donations</Nav.Link>
-							<Nav.Link href="/discover/voting">Voting Toolkit</Nav.Link>
-						</Nav>
-					</Col>
-				</Row>
-				<Link to="discover/create-event">
-					<Button
-						variant=""
-						className="w-100 m-3 btn rounded-pill start-event-btn"
-					>
-						Start Event
-					</Button>
-				</Link>
-			</Navbar.Collapse>
-		</>
-	);
-
-	return (
-		<Navbar
-			bg="light"
-			expand="lg"
-			sticky="top"
-			className="navbar-shadow scrolling"
-		>
-			{isResponsive ? mobileNavbar : regularNavbar}
 		</Navbar>
 	);
 }
